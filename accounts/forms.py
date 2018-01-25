@@ -132,7 +132,7 @@ class UpdateProfileForm(forms.ModelForm):
             'placeholder': 'Address 1',
             'class': 'form-control',
         }))
-    address2 = forms.CharField(label='Address 2', widget=forms.TextInput(
+    address2 = forms.CharField(label='Address 2', required=False, widget=forms.TextInput(
         attrs={
             'placeholder': 'Address 2',
             'class': 'form-control',
@@ -142,7 +142,7 @@ class UpdateProfileForm(forms.ModelForm):
             'placeholder': 'Phone Number 1',
             'class': 'form-control',
         }))
-    phone_number2 = forms.CharField(label='Phone Number 2', widget=forms.TextInput(
+    phone_number2 = forms.CharField(label='Phone Number 2', required=False, widget=forms.TextInput(
         attrs={
             'placeholder': 'Phone Number 2',
             'class': 'form-control',
