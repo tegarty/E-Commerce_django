@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block title %}
     {{ user }}'s {{ title }} | {{ block.super }}
 {% endblock %}
@@ -72,7 +74,9 @@
     {% if user.account.comments %}
         <p class="lead">Comments : {{ user.account.comments }}</p>
     {% endif %}
-    {% if user.account.image %}
+    {% if user.account.image != 'defauli.png' %}
         <p class="lead">Image : <img src="{{ user.account.image.url }}" alt="{{ user.username }}" class="img-responsive" style="max-width: 25%; max-height: 25%;"></p>
+    {% elif user.account.image == 'defauli.png' %}
+        <p class="lead">Image : <img src="{% static 'default.png' %}" alt="{{ user.username }}" class="img-responsive" style="max-width: 25%; max-height: 25%;"></p>
     {% endif %}
 {% endblock %}

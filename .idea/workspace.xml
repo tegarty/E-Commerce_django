@@ -48,10 +48,10 @@
         <option value="$PROJECT_DIR$/accounts/urls.py" />
         <option value="$PROJECT_DIR$/accounts/forms.py" />
         <option value="$PROJECT_DIR$/accounts/templates/accounts/delete_user_profile.html" />
-        <option value="$PROJECT_DIR$/accounts/templates/accounts/profile.html" />
         <option value="$PROJECT_DIR$/accounts/views.py" />
         <option value="$PROJECT_DIR$/templates/includes/nav_bar.html" />
         <option value="$PROJECT_DIR$/templates/includes/delete_account_modal.html" />
+        <option value="$PROJECT_DIR$/accounts/templates/accounts/profile.html" />
       </list>
     </option>
   </component>
@@ -105,6 +105,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\OSAMA\Desktop\e_commerce\media_cdn" />
       <recent name="C:\Users\OSAMA\Desktop\e_commerce\accounts" />
     </key>
   </component>
@@ -393,14 +394,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/accounts/templates/accounts/profile.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="74" column="28" lean-forward="true" selection-start-line="74" selection-start-column="28" selection-end-line="74" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/media_cdn/Screenshot_8.png">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -429,6 +422,16 @@
         <state relative-caret-position="294">
           <caret line="73" column="0" lean-forward="false" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/accounts/templates/accounts/profile.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="81" column="14" lean-forward="true" selection-start-line="81" selection-start-column="14" selection-end-line="81" selection-end-column="14" />
+          <folding>
+            <element signature="e#3448#3488#0#HTML" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
