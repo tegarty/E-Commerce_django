@@ -1,0 +1,20 @@
+{#{% if form.errors.non_field_errors %}#}
+{#    {{ form.errors.non_field_errors }}#}
+{#{% endif %}#}
+
+{#{% if form.errors %}#}
+{#    {{ form.errors }}#}
+{#{% endif %}#}
+
+{% load crispy_forms_tags %}
+
+<form method="POST" enctype="multipart/form-data" action="" class="form-group">
+    {% csrf_token %}
+{#    {% crispy form %}#}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">{{ title }}</button>
+</form>
+
+{#{% if form.instance %}#}
+{#    <h1>{{ form.instance }}</h1>#}
+{#{% endif %}#}

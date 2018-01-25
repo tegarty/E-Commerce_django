@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ user }}'s {{ title }} | {{ block.super }}
+{% endblock %}
+
+{% block body %}
+
+{#    <!-- Button trigger modal -->#}
+{#    <button class="btn btn-danger" href="" data-toggle="modal" data-target="#delete_account">#}
+{#      Delete My Account#}
+{#    </button>#}
+
+{#    <!-- delete account modal -->#}
+{#    <!-- Modal -->#}
+{#    <div class="modal fade" id="delete_account" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">#}
+{#      <div class="modal-dialog" role="document">#}
+{#        <div class="modal-content" style="border-radius: 6px;">#}
+{#          <div class="modal-header">#}
+{#            <h5 class="modal-title" id="exampleModalLabel">Delete Account</h5>#}
+{#            <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-top: -21px;">#}
+{#              <span aria-hidden="true">&times;</span>#}
+{#            </button>#}
+{#          </div>#}
+{#          <div class="modal-body">#}
+{#            Are you sure you want to delete your account?#}
+{#          </div>#}
+{#          <div class="modal-footer">#}
+{#            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>#}
+{#            <form method="post" action="{% url 'accounts:delete' %}" style="display: inline-block;">#}
+{#                {% csrf_token %}#}
+{#                <a href="{% url 'accounts:delete' %}">#}
+{#                    <button class="btn btn-danger">#}
+{#                        Confirm Delete#}
+{#                    </button>#}
+{#                </a>#}
+{#            </form>#}
+{#          </div>#}
+{#        </div>#}
+{#      </div>#}
+{#    </div>#}
+
+    <br>
+    <br>
+{#    <a href="{% url 'accounts:delete' %}" class="btn btn-danger">delete</a>#}
+    <p class="lead">Hello : {{ user.username }}</p>
+    <p class="lead">First Name : {{ user.first_name }}</p>
+    <p class="lead">Last Name : {{ user.last_name }}</p>
+    <p class="lead">Last login : {{ user.last_login }}</p>
+    <p class="lead">Joined in : {{ user.date_joined }}</p>
+    {% if user.account.phone_number1 %}
+        <p class="lead">Phone Number 1 : {{ user.account.phone_number1 }}</p>
+    {% endif %}
+    {% if user.account.phone_number2 %}
+        <p class="lead">Phone Number 2 : {{ user.account.phone_number2 }}</p>
+    {% endif %}
+    {% if user.account.gender %}
+        <p class="lead">Gender : {{ user.account.gender }}</p>
+    {% endif %}
+    {% if user.account.country %}
+        <p class="lead">Country : {{ user.account.country }}</p>
+    {% endif %}
+    {% if user.account.region %}
+        <p class="lead">Region : {{ user.account.region }}</p>
+    {% endif %}
+    {% if user.account.address1 %}
+        <p class="lead">Address1 : {{ user.account.address1 }}</p>
+    {% endif %}
+    {% if user.account.address2 %}
+        <p class="lead">Address2 : {{ user.account.address2 }}</p>
+    {% endif %}
+    {% if user.account.comments %}
+        <p class="lead">Comments : {{ user.account.comments }}</p>
+    {% endif %}
+    {% if user.account.image %}
+        <p class="lead">Image : <img src="{{ user.account.image.url }}" alt="{{ user.username }}" class="img-responsive" style="max-width: 25%; max-height: 25%;"></p>
+    {% endif %}
+{% endblock %}
