@@ -57,12 +57,56 @@
 
 
 						<ul class="pagination">
-{#							<li class="active"><a href="/products/1">1</a></li>#}
-{#                            {% for product in range(1, number_of_products + 2) %}#}
-{##}
-{#							<li><a href="/products/{{ product }}">{{ product }}</a></li>#}
-{##}
-{#                            {% endfor %}#}
+
+                            <div class="pagination"> <!-- page_request == the name of page that i want like:page -->
+                                <span class="step-links"> <!-- objects == the number of pages -->
+                                    {% if objects.has_previous %}
+                                        <a href="?{{ page_request }}={{ objects.previous_page_number }}
+                                            {% if request.GET.search_post %}
+                                                &search_post={{ request.GET.search_post }}
+                                            {% endif %}">previous
+                                        </a>
+                                    {% endif %}
+
+                                    <span class="current">
+                                        Page {{ objects.number }} of {{ objects.paginator.num_pages }}.
+                                    </span>
+
+                                    {% if objects.has_next %}
+                                        <a href="?{{ page_request }}={{ objects.next_page_number }}
+                                            {% if request.GET.search_post %}
+                                                &search_post={{ request.GET.search_post }}
+                                            {% endif %}">next
+                                        </a>
+                                    {% endif %}
+                                </span>
+                            </div>
+
+                            {% if is_paginated %}
+                                <ul class="pagination">
+                                    {% if page_obj.has_previous %}
+                                        <li>
+                                            <span>
+                                                <a href="?page={{ page_obj.previous_page_number }}">
+                                                    Previous
+                                                </a>
+                                            </span>
+                                        </li>
+                                    {% endif %}
+                                    <li class="">
+                                        <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.</span>
+                                    </li>
+                                    {% if page_obj.has_next %}
+                                        <li>
+                                            <span>
+                                                <a href="?page={{ page_obj.next_page_number }}">
+                                                    Next
+                                                </a>
+                                            </span>
+                                        </li>
+                                    {% endif %}
+                                </ul>
+                            {% endif %}
 						</ul>
 					</div><!--features_items-->
 				</div>

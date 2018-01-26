@@ -1,15 +1,31 @@
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from .models import Product
 
 
 class AllProductsListView(ListView):
-    queryset = Product.objects.all()
+    queryset = Product.objects.all().order_by('-id')
     template_name = 'products/all_products.html'
+    paginate_by = 2
 
     def get_context_data(self, **kwargs):
         context = super(AllProductsListView, self).get_context_data(**kwargs)
+
+        qs = Product.objects.all().order_by('-id')
+        paginator = Paginator(qs, self.paginate_by)
+        page_request = 'page'
+        page = self.request.GET.get(page_request)
+        try:
+            queryset = paginator.page(page)
+        except PageNotAnInteger:
+            queryset = paginator.page(1)
+        except EmptyPage:
+            queryset = paginator.page(paginator.num_pages)
+        context['objects'] = queryset
+        context['page_request'] = page_request
+
         context['title'] = 'All Products'
         return context
 
