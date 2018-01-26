@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import Http404
-from django.views.generic import CreateView, DetailView, UpdateView, DeleteView, View, ListView
+from django.views.generic import CreateView, DetailView, UpdateView, View
 from django.contrib.auth import login, logout, authenticate, get_user_model
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash

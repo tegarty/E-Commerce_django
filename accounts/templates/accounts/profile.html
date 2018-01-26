@@ -42,41 +42,135 @@
 {#      </div>#}
 {#    </div>#}
 
-    <br>
-    <br>
+{#    <br>#}
+{#    <br>#}
 {#    <a href="{% url 'accounts:delete' %}" class="btn btn-danger">delete</a>#}
-    <p class="lead">Hello : {{ user.username }}</p>
-    <p class="lead">First Name : {{ user.first_name }}</p>
-    <p class="lead">Last Name : {{ user.last_name }}</p>
-    <p class="lead">Last login : {{ user.last_login }}</p>
-    <p class="lead">Joined in : {{ user.date_joined }}</p>
-    {% if user.account.phone_number1 %}
-        <p class="lead">Phone Number 1 : {{ user.account.phone_number1 }}</p>
-    {% endif %}
-    {% if user.account.phone_number2 %}
-        <p class="lead">Phone Number 2 : {{ user.account.phone_number2 }}</p>
-    {% endif %}
-    {% if user.account.gender %}
-        <p class="lead">Gender : {{ user.account.gender }}</p>
-    {% endif %}
-    {% if user.account.country %}
-        <p class="lead">Country : {{ user.account.country }}</p>
-    {% endif %}
-    {% if user.account.region %}
-        <p class="lead">Region : {{ user.account.region }}</p>
-    {% endif %}
-    {% if user.account.address1 %}
-        <p class="lead">Address1 : {{ user.account.address1 }}</p>
-    {% endif %}
-    {% if user.account.address2 %}
-        <p class="lead">Address2 : {{ user.account.address2 }}</p>
-    {% endif %}
-    {% if user.account.comments %}
-        <p class="lead">Comments : {{ user.account.comments }}</p>
-    {% endif %}
-    {% if user.account.image != 'defauli.png' %}
-        <p class="lead">Image : <img src="{{ user.account.image.url }}" alt="{{ user.username }}" class="img-responsive" style="max-width: 25%; max-height: 25%;"></p>
-    {% elif user.account.image == 'defauli.png' %}
-        <p class="lead">Image : <img src="{% static 'default.png' %}" alt="{{ user.username }}" class="img-responsive" style="max-width: 25%; max-height: 25%;"></p>
-    {% endif %}
+{#    <p class="lead">Hello : {{ user.username }}</p>#}
+{#    <p class="lead">First Name : {{ user.first_name }}</p>#}
+{#    <p class="lead">Last Name : {{ user.last_name }}</p>#}
+{#    <p class="lead">Last login : {{ user.last_login }}</p>#}
+{#    <p class="lead">Joined in : {{ user.date_joined }}</p>#}
+{#    {% if user.account.phone_number1 %}#}
+{#        <p class="lead">Phone Number 1 : {{ user.account.phone_number1 }}</p>#}
+{#    {% endif %}#}
+{#    {% if user.account.phone_number2 %}#}
+{#        <p class="lead">Phone Number 2 : {{ user.account.phone_number2 }}</p>#}
+{#    {% endif %}#}
+{#    {% if user.account.gender %}#}
+{#        <p class="lead">Gender : {{ user.account.gender }}</p>#}
+{#    {% endif %}#}
+{#    {% if user.account.country %}#}
+{#        <p class="lead">Country : {{ user.account.country }}</p>#}
+{#    {% endif %}#}
+{#    {% if user.account.region %}#}
+{#        <p class="lead">Region : {{ user.account.region }}</p>#}
+{#    {% endif %}#}
+{#    {% if user.account.address1 %}#}
+{#        <p class="lead">Address1 : {{ user.account.address1 }}</p>#}
+{#    {% endif %}#}
+{#    {% if user.account.address2 %}#}
+{#        <p class="lead">Address2 : {{ user.account.address2 }}</p>#}
+{#    {% endif %}#}
+{#    {% if user.account.comments %}#}
+{#        <p class="lead">Comments : {{ user.account.comments }}</p>#}
+{#    {% endif %}#}
+{#    {% if user.account.image != 'defauli.png' %}#}
+{#        <p class="lead">Image : <img src="{{ user.account.image.url }}" alt="{{ user.username }}" class="img-responsive" style="max-width: 25%; max-height: 25%;"></p>#}
+{#    {% elif user.account.image == 'defauli.png' %}#}
+{#        <p class="lead">Image : <img src="{% static 'default.png' %}" alt="{{ user.username }}" class="img-responsive" style="max-width: 25%; max-height: 25%;"></p>#}
+{#    {% endif %}#}
+
+
+	<section>
+		<div class="container-fluid">
+			<div class="row">
+            <div class="card">
+
+                <div class="card-body">
+                    <h3 class="text-center" style="margin-top: 0;">Hello {{ user.username }}</h3>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    {% if user.account.image != 'defauli.png' %}
+                        <p class="lead"><img src="{{ user.account.image.url }}" alt="{{ user.username }}" class="img-responsive" style="max-width: 20%; max-height: 20%; display: block; margin: -65px auto 65px; border-radius: 6px;"></p>
+                    {% elif user.account.image == 'defauli.png' %}
+                        <p class="lead"><img src="{% static 'default.png' %}" alt="{{ user.username }}" class="img-responsive" style="max-width: 20%; max-height: 20%; display: block; margin: -65px auto 65px; border-radius: 6px;"></p>
+                    {% endif %}
+
+                    <table class="table table-responsive">
+                        <thead>
+                          <tr>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Phone Number 1</th>
+                            <th>Phone Number 2</th>
+                            <th>Gender</th>
+                            <th>Address1</th>
+                            <th>Address2</th>
+                            <th>Comments</th>
+                            <th>Region</th>
+                            <th>Country</th>
+                            <th>Joined In</th>
+                            <th>Last login</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>{{ user.first_name }}</td>
+                            <td>{{ user.last_name }}</td>
+                            <td>{{ user.account.phone_number1 }}</td>
+                            <td>{{ user.account.phone_number2 }}</td>
+                            <td>{{ user.account.gender }}</td>
+                            <td>{{ user.account.address1 }}</td>
+                            <td>{{ user.account.address2 }}</td>
+                            <td>{{ user.account.comments }}</td>
+                            <td>{{ user.account.region }}</td>
+                            <td>{{ user.account.country }}</td>
+                            <td>{{ user.date_joined }}</td>
+                            <td>{{ user.last_login | timesince }}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <hr>
+
+                      <table class="table table-striped">
+                        <thead>
+                          <tr>
+                            <th>Product Name</th>
+                            <th>Status</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                            <th>Discount</th>
+                            <th>Total</th>
+                            <th>Order Date</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                        {% for order in orders %}
+                          <tr>
+                            <td>{{ order.product_name }}</td>
+                            <td>{{ order.status }}</td>
+                            <td>{{ order.quantity }}</td>
+                            <td>{{ order.price }}</td>
+                            <td>{{ order.discount }}</td>
+{#                            <td>{{ (order.price - order.discount) * order.quantity }}</td>#}
+{#                            <td>{{ order.order_date.strftime('%a, %d %b %Y %H:%M:%S') }}</td>#}
+                          </tr>
+                        {% endfor %}
+                        </tbody>
+                      </table>
+                      <br>
+                      <br>
+                      <br>
+                      <br>
+                      <br>
+                      <br>
+                </div>
+            </div>
+
+			</div>
+		</div>
+	</section>
+
 {% endblock %}

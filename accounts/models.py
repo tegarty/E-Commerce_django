@@ -19,7 +19,7 @@ class Gender(models.Model):
 
 class Account(models.Model):
     user = models.OneToOneField(User)
-    gender = models.ForeignKey(Gender, blank=True, null=True)
+    gender = models.ForeignKey(Gender, on_delete=models.CASCADE, blank=True, null=True)
     country = models.CharField(max_length=255, blank=True, null=True)
     image = models.ImageField(default='default.png', blank=True, null=True)
     region = models.CharField(max_length=255, blank=True, null=True)

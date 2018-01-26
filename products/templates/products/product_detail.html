@@ -1,0 +1,195 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load mathfilters %}
+{% block title %}
+    {{ product.name }}'s Detail | {{ block.super }}
+{% endblock %}
+
+{% block body %}
+
+	<section>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-sm-3">
+					<div class="left-sidebar">
+						<h2>Categories</h2>
+						<div class="panel-group category-products" id="accordian"><!--category-productsr-->
+
+                            {% for category in categories %}
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h4 class="panel-title"><a href="#">&emsp; ()</a></h4>
+								</div>
+							</div>
+                            {% endfor %}
+
+						</div><!--/category-products-->
+
+
+
+					</div>
+				</div>
+
+				<div class="col-sm-9 padding-right">
+					<div class="product-details"><!--product-details-->
+						<div class="col-sm-12" style="margin-bottom: 50px;">
+							<div class="view-product">
+								<img src="{{ product.image.url }}" />
+								<h3>ZOOM</h3>
+							</div>
+						</div>
+
+						<div class="col-sm-12">
+							<div class="product-information"><!--/product-information-->
+								<img src="{% static 'new.jpg' %}" class="newarrival" alt="" />
+								<h2>{{ product.name }}</h2>
+								<p>Web ID: {{ product.id }}</p>
+{#								<img src="../../static/user/images/product-details/rating.png" alt="" />#}
+								<span>
+									<span>&#36; {{ product.price }}</span>
+{#									<label>Quantity:</label>#}
+{#									<input type="text" value="3" />#}
+                                    {% if product.quantity == 1 or product.quantity > 1  %}
+									<a href="#" class="btn btn-fefault cart" style="margin-top: 4px;">
+										<i class="fa fa-shopping-cart"></i>
+										Add to cart
+									</a>
+                                    {% elif product.quantity == 0 %}
+                                    <a href="" class="btn btn-danger" style="margin-top: 4px; margin-left: 25px; border-radius: 0;" disabled=""><i class="fa fa-shopping-cart" style="margin-right: 5px;"></i>Out Of Stock</a>
+                                    {% endif %}
+								</span>
+								<p><b>Discount Price:</b>&emsp; {{ product.price |mul:product.discount |div:100 |sub:product.price |mul:-1 }} &#36; </p>
+								<p><b>Discount Percentage:</b>&emsp; {{ product.discount }} &#37; </p>
+{#                                <p><b>Discount Price:</b>&emsp; {{ product.price }} - {{ product.discount }}</p>#}
+                                <p><b>Category:</b>&emsp; {{ product.category }}</p>
+                                <p><b>AVG Rate:</b>&emsp;
+                                {% if product.avg_rate %}
+                                    {{ product.avg_rate | floatformat:-2 }}
+                                    &#47; {{ 5 }}
+                                {% elif product.avg_rate == 0 %}
+                                {{ 'Not Rated Yet' }}
+                                {% endif %}
+                                </p>
+                                <p><b>Availability:</b>&emsp; {% if product.quantity == 1 or product.quantity > 1  %}{{ product.quantity }}{% elif product.quantity == 0 %}{{ 'Out Of Stock' }}{% endif %}</p>
+                                <p><b>Puplished In:</b>&emsp; {{ product.added }}</p>
+{#								<a href=""><img src="../../static/user/images/product-details/share.png" class="share img-responsive"  alt="" /></a>#}
+							</div><!--/product-information-->
+						</div>
+					</div><!--/product-details-->
+
+					<div class="category-tab shop-details-tab"><!--category-tab-->
+						<div class="col-sm-12">
+							<ul class="nav nav-tabs">
+								<li class="active"><a href="#details" data-toggle="tab">Product Details</a></li>
+{#								<li><a href="#reviews" data-toggle="tab">Reviews ({{ count_reviews }})</a></li>#}
+							</ul>
+						</div>
+						<div class="tab-content">
+							<div class="tab-pane fade active in" id="details" >
+                                <p style="padding: 50px; text-align: justify; color: #000; font-size: 18px; font-family: sans-serif;">{{ product.description }}</p>
+							</div>
+
+
+
+
+
+							<div class="tab-pane fade " id="reviews" >
+								<div class="col-sm-12">
+									<ul>
+{#										<li><i class="fa fa-user" style="color: #FE980F;"></i>&ensp;{{ review.user_name }}</li> &emsp;#}
+{#                                        {% if reviewresult == 1 %}#}
+{#										<li><i class="fa fa-clock-o" style="color: #FE980F;"></i>&ensp;{{ review.review_date.strftime('%H:%M:%S') }}</li> &emsp;#}
+{#										<li><i class="fa fa-calendar-o" style="color: #FE980F;"></i> &ensp;{{ review.review_date.strftime('%A, %d %B %Y') }}</li>#}
+{#                                        {% endif %}#}
+									</ul>
+{#                                    <p>#}
+{#                                        {% if review.rate != int %}#}
+{#                                            {% for star in range(review.rate) %}#}
+{#                                            <i class="fa fa-star" style="color: #FE980F;"></i>#}
+{#                                            {% endfor %}#}
+{#                                            &#47; 5#}
+    {#                                        {% for star in range(5) %}#}
+    {#                                        <i class="fa fa-star" style="color: #FE980F;"></i>#}
+    {#                                        {% endfor %}#}
+{#                                        {% else %}#}
+{#                                        {{ 'Not Rated Yet' }}#}
+{#                                        {% endif %}#}
+{#                                    </p>#}
+{#									<p>{{ review.review }}</p>#}
+                                    <br>
+                                    <br>
+                                    <br>
+									<p><b>Write Your Review</b></p>
+
+{#									<form action="{{ url_for('product_review', id=product.id) }}" method="post">#}
+{#										<textarea name="product_review_area"></textarea>#}
+{#										<b>Rate: </b> &emsp;#}
+{#                                        <select name="rate" style="width: 80px;" class="btn btn-default dropdown-toggle">#}
+{#                                            <option value="1">1</option>#}
+{#                                            <option value="2">2</option>#}
+{#                                            <option value="3">3</option>#}
+{#                                            <option value="4">4</option>#}
+{#                                            <option value="5">5</option>#}
+{#                                        </select>#}
+{#                                        <br>#}
+{#                                        <br>#}
+{#										<button type="submit" class="btn btn-default pull-left">#}
+{#											Add Review#}
+{#										</button>#}
+{#									</form>#}
+								</div>
+							</div>
+
+						</div>
+					</div><!--/category-tab-->
+
+					<div class="recommended_items"><!--recommended_items-->
+						<h2 class="title text-center">recommended items</h2>
+
+						<div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
+							<div class="carousel-inner">
+								<div class="item active">
+                                    {% for product in recommended %}
+									<div class="col-sm-4">
+										<div class="product-image-wrapper">
+											<div class="single-products">
+												<div class="productinfo text-center">
+                                                    <a href="{{ product.get_absolute_url }}"><img src="{{ product.image.url }}" class="image-thumbnail"></a>
+                                                    <h2>&#36;{{ product.price }}</h2>
+                                                    {% if product.discount %}
+            {#                                            <h3 style="color: red;">{{ ((100 * product.discount) / product.price) | int}} &#37; OFF</h3>#}
+                                                        <h3 style="color: red;">{{  product.discount }}  &#37; OFF</h3>
+                                                    {% else %}
+                                                        <h3 style="color: red;">0 &#37; OFF</h3>
+                                                    {% endif %}
+                                                    <p style="max-width: 252px; overflow: hidden;">{{ product.name | truncatechars:30 }}</p>
+                                                    <p><b>AVG Rate:</b>&emsp;
+                                                        {% if product.avg_rate %}
+                                                            {{ product.avg_rate | floatformat:-2 }}
+                                                            &#47; {{ 5 }}
+                                                        {% elif product.avg_rate == 0 %}
+                                                        {{ 'Not Rated Yet' }}
+                                                        {% endif %}
+                                                    </p>
+                                                    {% if product.quantity == 1 or product.quantity > 1  %}
+                                                        <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                                    {% elif product.quantity == 0 %}
+                                                        <a href="" class="btn btn-danger" style="margin-bottom: 24px; border-radius: 0;" disabled=""><i class="fa fa-shopping-cart" style="margin-right: 5px;"></i>Out Of Stock</a>
+                                                    {% endif %}
+												</div>
+											</div>
+										</div>
+									</div>
+                                    {% endfor %}
+								</div>
+							</div>
+						</div>
+					</div><!--/recommended_items-->
+
+				</div>
+			</div>
+		</div>
+	</section>
+
+{% endblock %}
