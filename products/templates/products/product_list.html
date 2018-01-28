@@ -53,8 +53,6 @@
                                 {% endfor %}
 							</div>
 
-
-
                             <div class="item">
                                 {% for slider in non_active_slider_1 %}
 								<div class="col-sm-6">
@@ -158,12 +156,11 @@
 						<div class="price-range"><!--price-range-->
 							<h2>Price Range</h2>
 							<div class="well text-center" style="padding-bottom: 0; margin-bottom: 0;">
-                                <form action="products_price_range" method="post">
-{#								    <input type="text" name="price_range" class="span2" value="{{ request.form.price_range }}" data-slider-min="1000" data-slider-max="100000" data-slider-step="1000" data-slider-value="[10000, 100000]" id="sl2">#}
-
-                                    <input type="number" name="min_price" class="form-control" placeholder="minimum price">
+                                <form action="" method="post">
+                                    {% csrf_token %}
+                                    <input type="number" name="minimum" minlength="1" class="form-control" placeholder="minimum price">
                                     <br>
-                                    <input type="number" name="max_price" class="form-control" placeholder="maximum price">
+                                    <input type="number" name="maximum" maxlength="6" class="form-control" placeholder="maximum price">
                                     <input type="submit" value="Go" class="btn btn-primary">
                                 </form>
                                  <br />

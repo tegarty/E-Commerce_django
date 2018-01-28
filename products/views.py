@@ -1,6 +1,8 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, DetailView, View
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.db.models import Q
+
 
 from .models import Product, Category
 
@@ -47,6 +49,21 @@ class ProductsListView(ListView):
         context['non_active_slider_2'] = Product.objects.filter(slider=True)[2:3]
         return context
 
+    def post(self, request):
+        minimum = self.request.POST.get('minimum')
+        maximum = self.request.POST.get('maximum')
+        queryset = None
+        if not minimum == '' and not maximum == '':
+            queryset = Product.objects.filter(price__range=(minimum, maximum))
+        else:
+            return redirect('products:list')
+        context = {
+            'products': queryset,
+            'categories': Category.objects.all().order_by('category'),
+            'title': 'Price Range',
+        }
+        return render(request, 'products/categories.html', context)
+
 
 class ProductDetailView(DetailView):
     template_name = 'products/product_detail.html'
@@ -71,4 +88,15 @@ class CategoryListView(ListView):
         context['title'] = 'Category'
         context['categories'] = Category.objects.all().order_by('category')
         context['products'] = Product.objects.filter(category__category=self.kwargs['category'])
+        context['current_category'] = self.kwargs['category']
         return context
+
+
+
+
+
+
+# for remember
+# class List(ListView):
+#     def get_queryset(self):
+#         return Product.objects.filter(user=self.request.user)

@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block title %}
-    {{ title }} | {{ block.super }}
+    {{ title }} {{ current_category.upper }} | {{ block.super }}
 {% endblock %}
 
 {% block body %}
@@ -31,8 +31,16 @@
 
 				<div class="col-sm-9 padding-right">
 					<div class="features_items"><!--features_items-->
-						<h2 class="title text-center">Category Products</h2>
-						<h2 class="title text-center">Found {{ products | length }}</h2>
+						<h2 class="title text-center">{{ title }} {{ current_category }} Products</h2>
+						<h2 class="title text-center">
+                            {% if products.count == 1 %}
+                                Found {{ products | length }} product
+                            {% elif products.count == 0 %}
+                                no products found!
+                            {% else %}
+                                Found {{ products | length }} products
+                            {% endif %}
+                        </h2>
 
                         {% for product in products %}
 						<div class="col-sm-4">
