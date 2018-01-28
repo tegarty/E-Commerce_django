@@ -17,11 +17,11 @@
 						<div class="panel-group category-products" id="accordian"><!--category-productsr-->
 
                             {% for category in categories %}
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h4 class="panel-title"><a href="#">&emsp; ()</a></h4>
-								</div>
-							</div>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title"><a href="{{ category.get_absolute_categories_url }}">{{ category }} &emsp; ({{ category.number_of_products }})</a></h4>
+                                    </div>
+                                </div>
                             {% endfor %}
 
 						</div><!--/category-products-->
@@ -59,9 +59,20 @@
                                     <a href="" class="btn btn-danger" style="margin-top: 4px; margin-left: 25px; border-radius: 0;" disabled=""><i class="fa fa-shopping-cart" style="margin-right: 5px;"></i>Out Of Stock</a>
                                     {% endif %}
 								</span>
-								<p><b>Discount Price:</b>&emsp; {{ product.price |mul:product.discount |div:100 |sub:product.price |mul:-1 }} &#36; </p>
-								<p><b>Discount Percentage:</b>&emsp; {{ product.discount }} &#37; </p>
-{#                                <p><b>Discount Price:</b>&emsp; {{ product.price }} - {{ product.discount }}</p>#}
+								<p><b>Discount Price:</b>
+                                    {% if product.discount %}
+                                        &emsp; {{ product.price |mul:product.discount |div:100 |sub:product.price |mul:-1 }} &#36;
+                                    {% else %}
+                                        &emsp; 0 &#36;
+                                    {% endif %}
+                                </p>
+								<p><b>Discount Percentage:</b>
+                                    {% if product.discount %}
+                                        &emsp; {{ product.discount }} &#37;
+                                    {% else %}
+                                        &emsp; 0 &#37;
+                                    {% endif %}
+                                </p>
                                 <p><b>Category:</b>&emsp; {{ product.category }}</p>
                                 <p><b>AVG Rate:</b>&emsp;
                                 {% if product.avg_rate %}

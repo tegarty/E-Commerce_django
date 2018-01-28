@@ -1,8 +1,8 @@
 from django.shortcuts import render, get_object_or_404
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, View
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
-from .models import Product
+from .models import Product, Category
 
 
 class AllProductsListView(ListView):
@@ -31,7 +31,8 @@ class AllProductsListView(ListView):
 
 
 class ProductsListView(ListView):
-    queryset = Product.objects.all()
+    # queryset = Product.objects.all()
+    queryset = ''
     template_name = 'products/product_list.html'
 
     def get_context_data(self, **kwargs):
@@ -40,6 +41,7 @@ class ProductsListView(ListView):
         context['latest_products'] = Product.objects.all().order_by('-id')[:6]  # [start(offset):stop(limit):step]
         context['recommended'] = Product.objects.all().order_by('number_of_sales')[:3]
         context['recommended_2'] = Product.objects.all().order_by('number_of_sales')[3:6]
+        context['categories'] = Category.objects.all().order_by('category')
         return context
 
 
@@ -53,4 +55,17 @@ class ProductDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super(ProductDetailView, self).get_context_data(**kwargs)
         context['recommended'] = Product.objects.all().order_by('number_of_sales')[:3]
+        context['categories'] = Category.objects.all().order_by('category')
+        return context
+
+
+class CategoryListView(ListView):
+    queryset = ''
+    template_name = 'products/categories.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(CategoryListView, self).get_context_data(**kwargs)
+        context['title'] = 'Category'
+        context['categories'] = Category.objects.all().order_by('category')
+        context['products'] = Product.objects.filter(category__category=self.kwargs['category'])
         return context

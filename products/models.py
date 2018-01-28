@@ -1,5 +1,4 @@
 from django.db import models
-from django.db.models import F
 from django.db.models.signals import pre_save, post_save
 from django.contrib.auth import get_user_model
 from django.core.urlresolvers import reverse
@@ -20,6 +19,9 @@ class Category(models.Model):
     def __str__(self):
         return self.category
 
+    def get_absolute_categories_url(self):
+        return reverse('products:category', kwargs={'category': self.category})
+
 
 class Product(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -28,10 +30,10 @@ class Product(models.Model):
     name = models.CharField(max_length=255)
     price = models.PositiveIntegerField()
     quantity = models.PositiveIntegerField()
-    discount = models.FloatField(blank=True, null=True)
-    number_of_sales = models.PositiveIntegerField(blank=True, null=True)
-    number_of_views = models.PositiveIntegerField(blank=True, null=True)
-    avg_rate = models.FloatField(blank=True, null=True)
+    discount = models.FloatField(default=0, blank=True, null=True)
+    number_of_sales = models.PositiveIntegerField(default=0, blank=True, null=True)
+    number_of_views = models.PositiveIntegerField(default=0, blank=True, null=True)
+    avg_rate = models.FloatField(default=0, blank=True, null=True)
     description = models.TextField()
     image = models.ImageField()
     publish = models.BooleanField(default=True)

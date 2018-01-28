@@ -153,7 +153,7 @@
                             {% for category in categories %}
                                 <div class="panel panel-default">
                                     <div class="panel-heading">
-    {#									<h4 class="panel-title"><a href="/categories/{{ category.category }}">{{ category.category }} &emsp; ({{ category.number_of_products }})</a></h4>#}
+    									<h4 class="panel-title"><a href="{{ category.get_absolute_categories_url }}">{{ category }} &emsp; ({{ category.number_of_products }})</a></h4>
                                     </div>
                                 </div>
 							{% endfor %}
