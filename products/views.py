@@ -52,17 +52,31 @@ class ProductsListView(ListView):
     def post(self, request):
         minimum = self.request.POST.get('minimum')
         maximum = self.request.POST.get('maximum')
-        queryset = None
+        search = self.request.POST.get('search')
+        if search == '':
+            return redirect('products:list')
+        if search:
+            queryset = Product.objects.filter(
+                Q(name__icontains=search) |
+                Q(description__icontains=search) |
+                Q(category__category__icontains=search)
+            ).distinct()
+            context = {
+                'products': queryset,
+                'categories': Category.objects.all().order_by('category'),
+                'title': 'Search',
+            }
+            return render(request, 'products/categories.html', context)
         if not minimum == '' and not maximum == '':
             queryset = Product.objects.filter(price__range=(minimum, maximum))
+            context = {
+                'products': queryset,
+                'categories': Category.objects.all().order_by('category'),
+                'title': 'Price Range',
+            }
+            return render(request, 'products/categories.html', context)
         else:
             return redirect('products:list')
-        context = {
-            'products': queryset,
-            'categories': Category.objects.all().order_by('category'),
-            'title': 'Price Range',
-        }
-        return render(request, 'products/categories.html', context)
 
 
 class ProductDetailView(DetailView):
@@ -90,9 +104,6 @@ class CategoryListView(ListView):
         context['products'] = Product.objects.filter(category__category=self.kwargs['category'])
         context['current_category'] = self.kwargs['category']
         return context
-
-
-
 
 
 
