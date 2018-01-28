@@ -42,6 +42,9 @@ class ProductsListView(ListView):
         context['recommended'] = Product.objects.all().order_by('number_of_sales')[:3]
         context['recommended_2'] = Product.objects.all().order_by('number_of_sales')[3:6]
         context['categories'] = Category.objects.all().order_by('category')
+        context['active_slider'] = Product.objects.filter(slider=True)[:1]
+        context['non_active_slider_1'] = Product.objects.filter(slider=True)[1:2]
+        context['non_active_slider_2'] = Product.objects.filter(slider=True)[2:3]
         return context
 
 

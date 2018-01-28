@@ -19,114 +19,107 @@
 							<li data-target="#slider-carousel" data-slide-to="2"></li>
 						</ol>
 
-{#						<div class="carousel-inner">#}
-{##}
-{#							<div class="item active">#}
-{#                                {% for slider in slider_products_first %}#}
-{#								<div class="col-sm-6">#}
-{#									<h1><span>{{ slider.product_name }}</span></h1>#}
-{#									<h2>&#36; {{ slider.price }}</h2>#}
-{#                                    <h3 style="color: red;">{{ ((100 * slider.discount) / slider.price) | round(2, 'common')}} &#37; OFF</h3>#}
-{#									<p>{{ slider.description | truncate(30) }}</p>#}
-{#                                    <p><b>AVG Rate:</b>&emsp;#}
-{#                                        {% if slider.avg_rate in range(1,6) %}#}
-{#                                        {{ slider.avg_rate | int }}#}
-{#                                        &#47; {{ 5 }}#}
-{#                                        {% elif slider.avg_rate == 0.1,6.0 %}#}
-{#                                            {% if slider.avg_rate == 0 %}#}
-{#                                            {{ 'Not Rated Yet' }}#}
-{#                                            {% else %}#}
-{#                                            {{ slider.avg_rate | round(2, 'common') }}#}
-{#                                            &#47; {{ 5 }}#}
-{#                                            {% endif %}#}
-{#                                        {% elif slider.avg_rate == None %}#}
-{#                                        {{ 'Not Rated Yet' }}#}
-{#                                        {% endif %}#}
-{#                                    </p>#}
-{#                                    {% if slider.quantity == 1 or slider.quantity > 1  %}#}
-{#                                    <a href="/add_product_to_cart_from_slider/{{ slider.id }}" class="btn btn-default get"><i class="fa fa-shopping-cart" style="margin-right: 5px;"></i>Add to cart</a>#}
-{#                                    {% elif slider.quantity == 0 %}#}
-{#                                    <a href="" class="btn btn-danger" style="margin-top: 24px; border-radius: 0;" disabled=""><i class="fa fa-shopping-cart" style="margin-right: 5px;"></i>Out Of Stock</a>#}
-{#                                    {% endif %}#}
-{#								</div>#}
-{#								<div class="col-sm-6">#}
-{#                                    <a href="/preview_production_slider/{{ slider.id }}/"><img src="../static/uploads/slider_products/{{ slider.product_name }}/{{ slider.files }}" class="girl img-responsive" style="max-width: 520px; height: 354px;" /></a>#}
+						<div class="carousel-inner">
+
+							<div class="item active">
+                                {% for slider in active_slider %}
+								<div class="col-sm-6">
+									<h1><span>{{ slider.name }}</span></h1>
+									<h2>&#36; {{ slider.price }}</h2>
+                                    {% if slider.discount %}
+                                        <h3 style="color: red;">{{  slider.discount }}  &#37; OFF</h3>
+                                    {% else %}
+                                        <h3 style="color: red;">0 &#37; OFF</h3>
+                                    {% endif %}
+									<p>{{ slider.description | truncatechars:30 }}</p>
+                                    <p><b>AVG Rate:</b>&emsp;
+                                        {% if slider.avg_rate %}
+                                            {{ slider.avg_rate | floatformat:-2 }}
+                                            &#47; {{ 5 }}
+                                        {% elif slider.avg_rate == 0 %}
+                                        {{ 'Not Rated Yet' }}
+                                        {% endif %}
+                                    </p>
+                                    {% if slider.quantity == 1 or slider.quantity > 1  %}
+                                        <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                    {% elif slider.quantity == 0 %}
+                                        <a href="" class="btn btn-danger" style="margin-bottom: 24px; border-radius: 0;" disabled=""><i class="fa fa-shopping-cart" style="margin-right: 5px;"></i>Out Of Stock</a>
+                                    {% endif %}
+								</div>
+								<div class="col-sm-6">
+                                    <a href="{{ slider.get_absolute_url }}"><img src="{{ slider.image.url }}" class="girl img-responsive" style="max-width: 520px; height: 354px;" /></a>
 {#									<img src="../static/user/images/home/pricing.png"  class="pricing" alt="" />#}
-{#								</div>#}
-{#                                {% endfor %}#}
-{#							</div>#}
-{##}
-{#                            <div class="item">#}
-{#                                {% for slider in slider_products_second %}#}
-{#								<div class="col-sm-6">#}
-{#									<h1><span>{{ slider.product_name }}</span></h1>#}
-{#									<h2>&#36; {{ slider.price }}</h2>#}
-{#                                    <h3 style="color: red;">{{ ((100 * slider.discount) / slider.price) | round(2, 'common')}} &#37; OFF</h3>#}
-{#									<p>{{ slider.description | truncate(30) }}</p>#}
-{#                                    <p><b>AVG Rate:</b>&emsp;#}
-{#                                        {% if slider.avg_rate in range(1,6) %}#}
-{#                                        {{ slider.avg_rate | int }}#}
-{#                                        &#47; {{ 5 }}#}
-{#                                        {% elif slider.avg_rate == 0.1,6.0 %}#}
-{#                                            {% if slider.avg_rate == 0 %}#}
-{#                                            {{ 'Not Rated Yet' }}#}
-{#                                            {% else %}#}
-{#                                            {{ slider.avg_rate | round(2, 'common') }}#}
-{#                                            &#47; {{ 5 }}#}
-{#                                            {% endif %}#}
-{#                                        {% elif slider.avg_rate == None %}#}
-{#                                        {{ 'Not Rated Yet' }}#}
-{#                                        {% endif %}#}
-{#                                    </p>#}
-{#                                    {% if slider.quantity == 1 or slider.quantity > 1  %}#}
-{#									<a href="/add_product_to_cart_from_slider/{{ slider.id }}" class="btn btn-default get"><i class="fa fa-shopping-cart" style="margin-right: 5px;"></i>Add to cart</a>#}
-{#                                    {% elif slider.quantity == 0 %}#}
-{#                                    <a href="" class="btn btn-danger" style="margin-top: 24px; border-radius: 0;" disabled=""><i class="fa fa-shopping-cart" style="margin-right: 5px;"></i>Out Of Stock</a>#}
-{#                                    {% endif %}#}
-{#								</div>#}
-{#								<div class="col-sm-6">#}
-{#                                    <a href="/preview_production_slider/{{ slider.id }}/"><img src="../static/uploads/slider_products/{{ slider.product_name }}/{{ slider.files }}" class="girl img-responsive" style="max-width: 520px; height: 354px;" /></a>#}
+								</div>
+                                {% endfor %}
+							</div>
+
+
+
+                            <div class="item">
+                                {% for slider in non_active_slider_1 %}
+								<div class="col-sm-6">
+									<h1><span>{{ slider.name }}</span></h1>
+									<h2>&#36; {{ slider.price }}</h2>
+                                    {% if slider.discount %}
+                                        <h3 style="color: red;">{{  slider.discount }}  &#37; OFF</h3>
+                                    {% else %}
+                                        <h3 style="color: red;">0 &#37; OFF</h3>
+                                    {% endif %}
+									<p>{{ slider.description | truncatechars:30 }}</p>
+                                    <p><b>AVG Rate:</b>&emsp;
+                                        {% if slider.avg_rate %}
+                                            {{ slider.avg_rate | floatformat:-2 }}
+                                            &#47; {{ 5 }}
+                                        {% elif slider.avg_rate == 0 %}
+                                        {{ 'Not Rated Yet' }}
+                                        {% endif %}
+                                    </p>
+                                    {% if slider.quantity == 1 or slider.quantity > 1  %}
+                                        <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                    {% elif slider.quantity == 0 %}
+                                        <a href="" class="btn btn-danger" style="margin-bottom: 24px; border-radius: 0;" disabled=""><i class="fa fa-shopping-cart" style="margin-right: 5px;"></i>Out Of Stock</a>
+                                    {% endif %}
+								</div>
+								<div class="col-sm-6">
+                                    <a href="{{ slider.get_absolute_url }}"><img src="{{ slider.image.url }}" class="girl img-responsive" style="max-width: 520px; height: 354px;" /></a>
 {#									<img src="../static/user/images/home/pricing.png"  class="pricing" alt="" />#}
-{#								</div>#}
-{#                                {% endfor %}#}
-{#							</div>#}
-{##}
-{#                            <div class="item">#}
-{#                                {% for slider in slider_products_third %}#}
-{#								<div class="col-sm-6">#}
-{#									<h1><span>{{ slider.product_name }}</span></h1>#}
-{#									<h2>&#36; {{ slider.price }}</h2>#}
-{#                                    <h3 style="color: red;">{{ ((100 * slider.discount) / slider.price) | round(2, 'common')}} &#37; OFF</h3>#}
-{#									<p>{{ slider.description | truncate(30) }}</p>#}
-{#                                    <p><b>AVG Rate:</b>&emsp;#}
-{#                                        {% if slider.avg_rate in range(1,6) %}#}
-{#                                        {{ slider.avg_rate | int }}#}
-{#                                        &#47; {{ 5 }}#}
-{#                                        {% elif slider.avg_rate == 0.1,6.0 %}#}
-{#                                            {% if slider.avg_rate == 0 %}#}
-{#                                            {{ 'Not Rated Yet' }}#}
-{#                                            {% else %}#}
-{#                                            {{ slider.avg_rate | round(2, 'common') }}#}
-{#                                            &#47; {{ 5 }}#}
-{#                                            {% endif %}#}
-{#                                        {% elif slider.avg_rate == None %}#}
-{#                                        {{ 'Not Rated Yet' }}#}
-{#                                        {% endif %}#}
-{#                                    </p>#}
-{#                                    {% if slider.quantity == 1 or slider.quantity > 1  %}#}
-{#									<a href="/add_product_to_cart_from_slider/{{ slider.id }}" class="btn btn-default get"><i class="fa fa-shopping-cart" style="margin-right: 5px;"></i>Add to cart</a>#}
-{#                                    {% elif slider.quantity == 0 %}#}
-{#                                    <a href="" class="btn btn-danger" style="margin-top: 24px; border-radius: 0;" disabled=""><i class="fa fa-shopping-cart" style="margin-right: 5px;"></i>Out Of Stock</a>#}
-{#                                    {% endif %}#}
-{#								</div>#}
-{#								<div class="col-sm-6">#}
-{#                                    <a href="/preview_production_slider/{{ slider.id }}/"><img src="../static/uploads/slider_products/{{ slider.product_name }}/{{ slider.files }}" class="girl img-responsive" style="max-width: 520px; height: 354px;" /></a>#}
+								</div>
+                                {% endfor %}
+							</div>
+
+                            <div class="item">
+                                {% for slider in non_active_slider_2 %}
+								<div class="col-sm-6">
+									<h1><span>{{ slider.name }}</span></h1>
+									<h2>&#36; {{ slider.price }}</h2>
+                                    {% if slider.discount %}
+                                        <h3 style="color: red;">{{  slider.discount }}  &#37; OFF</h3>
+                                    {% else %}
+                                        <h3 style="color: red;">0 &#37; OFF</h3>
+                                    {% endif %}
+									<p>{{ slider.description | truncatechars:30 }}</p>
+                                    <p><b>AVG Rate:</b>&emsp;
+                                        {% if slider.avg_rate %}
+                                            {{ slider.avg_rate | floatformat:-2 }}
+                                            &#47; {{ 5 }}
+                                        {% elif slider.avg_rate == 0 %}
+                                        {{ 'Not Rated Yet' }}
+                                        {% endif %}
+                                    </p>
+                                    {% if slider.quantity == 1 or slider.quantity > 1  %}
+                                        <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                    {% elif slider.quantity == 0 %}
+                                        <a href="" class="btn btn-danger" style="margin-bottom: 24px; border-radius: 0;" disabled=""><i class="fa fa-shopping-cart" style="margin-right: 5px;"></i>Out Of Stock</a>
+                                    {% endif %}
+								</div>
+								<div class="col-sm-6">
+                                    <a href="{{ slider.get_absolute_url }}"><img src="{{ slider.image.url }}" class="girl img-responsive" style="max-width: 520px; height: 354px;" /></a>
 {#									<img src="../static/user/images/home/pricing.png"  class="pricing" alt="" />#}
-{#								</div>#}
-{#                                {% endfor %}#}
-{#							</div>#}
-{##}
-{#						</div>#}
+								</div>
+                                {% endfor %}
+							</div>
+
+						</div>
 
 						<a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
 							<i class="fa fa-angle-left"></i>

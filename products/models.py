@@ -36,6 +36,7 @@ class Product(models.Model):
     avg_rate = models.FloatField(default=0, blank=True, null=True)
     description = models.TextField()
     image = models.ImageField()
+    slider = models.BooleanField(default=False)
     publish = models.BooleanField(default=True)
     added = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)

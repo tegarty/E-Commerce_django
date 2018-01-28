@@ -8,6 +8,7 @@ class ProductModelAdmin(admin.ModelAdmin):
         '__str__',
         'id',
         'publish',
+        'slider',
         'name',
         'price',
         'quantity',
@@ -24,6 +25,7 @@ class ProductModelAdmin(admin.ModelAdmin):
     list_filter = [
         'category',
         'publish',
+        'slider',
         'price',
         'quantity',
         'discount',
