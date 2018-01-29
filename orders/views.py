@@ -99,7 +99,7 @@ class CheckoutUpdateView(UpdateView):
 
 
 # delete order
-class ProfileDeleteView(View):
+class OrderDeleteView(View):
     template_name = 'orders/checkout.html'
 
     def post(self, request, id):
@@ -110,5 +110,5 @@ class ProfileDeleteView(View):
             qs = Checkout.objects.filter(id=id)
             if qs.exists() and qs.count() == 1:
                 order = qs.first()
-                # order.delete()
+                order.delete()
                 return redirect('orders:checkout')
