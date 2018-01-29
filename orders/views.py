@@ -68,7 +68,10 @@ class OrdersView(ListView):
     def get_context_data(self, **kwargs):
         context = super(OrdersView, self).get_context_data(**kwargs)
         context['title'] = 'Orders'
-        context['orders'] = Checkout.objects.filter(user=self.request.user, status='accepted')
+        if self.request.user.is_authenticated:
+            context['orders'] = Checkout.objects.filter(user=self.request.user, status='accepted')
+        else:
+            raise Http404
         return context
 
 
@@ -80,7 +83,10 @@ class CheckoutOrderView(ListView):
     def get_context_data(self, **kwargs):
         context = super(CheckoutOrderView, self).get_context_data(**kwargs)
         context['title'] = 'Cart'
-        context['orders'] = Checkout.objects.filter(user=self.request.user, status='pending')
+        if self.request.user.is_authenticated:
+            context['orders'] = Checkout.objects.filter(user=self.request.user, status='pending')
+        else:
+            raise Http404
         return context
 
 
