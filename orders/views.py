@@ -72,9 +72,39 @@ class OrdersView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(OrdersView, self).get_context_data(**kwargs)
-        context['title'] = 'Orders'
+        context['title'] = 'Pending Orders'
+        if self.request.user.is_authenticated:
+            context['orders'] = Checkout.objects.filter(user=self.request.user, status='pending')
+        else:
+            raise Http404
+        return context
+
+
+# all orders page that submitted & accepted
+class AcceptedOrdersView(ListView):
+    template_name = 'orders/orders.html'
+    queryset = ''
+
+    def get_context_data(self, **kwargs):
+        context = super(AcceptedOrdersView, self).get_context_data(**kwargs)
+        context['title'] = 'Accepted Orders'
         if self.request.user.is_authenticated:
             context['orders'] = Checkout.objects.filter(user=self.request.user, status='accepted')
+        else:
+            raise Http404
+        return context
+
+
+# all orders page that submitted & rejected
+class RejectedOrdersView(ListView):
+    template_name = 'orders/orders.html'
+    queryset = ''
+
+    def get_context_data(self, **kwargs):
+        context = super(RejectedOrdersView, self).get_context_data(**kwargs)
+        context['title'] = 'Rejected Orders'
+        if self.request.user.is_authenticated:
+            context['orders'] = Checkout.objects.filter(user=self.request.user, status='rejected')
         else:
             raise Http404
         return context
@@ -89,7 +119,7 @@ class CheckoutOrderView(ListView):
         context = super(CheckoutOrderView, self).get_context_data(**kwargs)
         context['title'] = 'Cart'
         if self.request.user.is_authenticated:
-            context['orders'] = Checkout.objects.filter(user=self.request.user, status='pending')
+            context['orders'] = Checkout.objects.filter(user=self.request.user, status='waiting')
         else:
             raise Http404
         return context
@@ -125,6 +155,44 @@ class OrderDeleteView(View):
                 order = qs.first()
                 order.delete()
                 return redirect('orders:checkout')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Buy orders
+class BuyOrdersView(View):
+    template_name = 'orders/orders.html'
+
+    def post(self, request, id):
+        username = self.request.user
+        if username is None:
+            raise Http404
+        else:
+            qs = Checkout.objects.filter(id=id)
+            if qs.exists() and qs.count() == 1:
+                order = qs.first()
+                return redirect('orders:pending')
+
+
+
+
+
 
 
 

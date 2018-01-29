@@ -8,8 +8,14 @@ User = get_user_model()
 
 
 class Checkout(models.Model):
+    STATUS_CHOICES = [
+        ('waiting', 'Waiting'),
+        ('pending', 'Pending'),
+        ('accepted', 'Accepted'),
+        ('rejected', 'Rejected'),
+    ]
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    status = models.CharField(max_length=255, default='pending')
+    status = models.CharField(max_length=255, choices=STATUS_CHOICES, default='waiting')
     product_id = models.PositiveIntegerField()
     name = models.CharField(max_length=255)
     slug = models.SlugField(unique=True, blank=True, null=True)

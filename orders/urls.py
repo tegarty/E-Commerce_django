@@ -6,6 +6,9 @@ from .views import (
     OrderDeleteView,
     CheckoutOrderView,
     OrdersView,
+    AcceptedOrdersView,
+    RejectedOrdersView,
+    BuyOrdersView,
     )
 
 urlpatterns = [
@@ -13,5 +16,8 @@ urlpatterns = [
     url(r'^order/(?P<pk>\d+)/update/$', CheckoutUpdateView.as_view(), name='update'),
     url(r'^order/(?P<id>\d+)/delete/$', OrderDeleteView.as_view(), name='delete'),
     url(r'^cart/$', CheckoutOrderView.as_view(), name='checkout'),
-    url(r'^$', OrdersView.as_view(), name='orders'),
+    url(r'^pending/$', OrdersView.as_view(), name='pending'),
+    url(r'^rejected/$', RejectedOrdersView.as_view(), name='rejected'),
+    url(r'^accepted/$', AcceptedOrdersView.as_view(), name='accepted'),
+    url(r'^buy/$', BuyOrdersView.as_view(), name='buy'),
 ]

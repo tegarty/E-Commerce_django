@@ -31,7 +31,7 @@
         <tbody>
         {% for order in orders %}
           <tr>
-            <td><a href="{% url 'orders:update' pk=order.id %}">{{ order.name }}</a></td>
+            <td>{{ order.name }}</td>
             <td>{{ order.status }}</td>
             <td>{{ order.quantity }}</td>
             <td>{{ order.price }}</td>

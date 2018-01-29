@@ -39,7 +39,9 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Orders<span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="{% url 'orders:checkout' %}">Cart</a></li>
-            <li><a href="{% url 'orders:orders' %}">Orders</a></li>
+            <li><a href="{% url 'orders:pending' %}">Pending Orders</a></li>
+            <li><a href="{% url 'orders:accepted' %}">Accepted Orders</a></li>
+            <li><a href="{% url 'orders:rejected' %}">Rejected Orders</a></li>
 {#            <li role="separator" class="divider"></li>#}
           </ul>
         </li>
