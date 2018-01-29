@@ -5,6 +5,7 @@ from django.contrib.auth import login, logout, authenticate, get_user_model
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from django.conf import settings
+from django.urls import reverse_lazy
 
 from .forms import RegisterForm, LoginForm, UpdateProfileForm
 from .models import Account
@@ -113,7 +114,7 @@ class UserProfileView(DetailView):
     def get_context_data(self, **kwargs):
         context = super(UserProfileView, self).get_context_data(**kwargs)
         context['title'] = 'Profile'
-        context['orders'] = Checkout.objects.filter(user=self.request.user)
+        # context['orders'] = Checkout.objects.filter(user=self.request.user)
         return context
 
 
@@ -132,7 +133,7 @@ class ProfileUpdateView(UpdateView):
     #     'comments',
     # ]
     template_name = 'accounts/update_profile.html'
-    success_url = '/accounts/profile/'
+    success_url = reverse_lazy('accounts:profile')
     # lookup_field = 'id'
     # lookup_url_kwarg = 'id'
 

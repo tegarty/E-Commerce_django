@@ -134,35 +134,35 @@
                           </tr>
                         </tbody>
                       </table>
-                      <hr>
-
-                      <table class="table table-striped">
-                        <thead>
-                          <tr>
-                            <th>Product Name</th>
-                            <th>Status</th>
-                            <th>Quantity</th>
-                            <th>Price</th>
-                            <th>Discount</th>
-                            <th>Total</th>
-                            <th>Order Date</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                        {% for order in orders %}
-                          <tr>
-                            <td>{{ order.name }}</td>
-                            <td>{{ order.status }}</td>
-                            <td>{{ order.quantity }}</td>
-                            <td>{{ order.price }}</td>
-                            <td>{{ order.discount }}</td>
-                            <td>{{ order.price |mul:order.discount |div:100 |sub:order.price |mul:-1 |mul:order.quantity }}</td>
+{#                      <hr>#}
+{##}
+{#                      <table class="table table-striped">#}
+{#                        <thead>#}
+{#                          <tr>#}
+{#                            <th>Product Name</th>#}
+{#                            <th>Status</th>#}
+{#                            <th>Quantity</th>#}
+{#                            <th>Price</th>#}
+{#                            <th>Discount</th>#}
+{#                            <th>Total</th>#}
+{#                            <th>Order Date</th>#}
+{#                          </tr>#}
+{#                        </thead>#}
+{#                        <tbody>#}
+{#                        {% for order in orders %}#}
+{#                          <tr>#}
+{#                            <td><a href="{% url 'orders:update' pk=order.id %}">{{ order.name }}</a></td>#}
+{#                            <td>{{ order.status }}</td>#}
+{#                            <td>{{ order.quantity }}</td>#}
+{#                            <td>{{ order.price }}</td>#}
+{#                            <td>{{ order.discount }}</td>#}
+{#                            <td>{{ order.price |mul:order.discount |div:100 |sub:order.price |mul:-1 |mul:order.quantity }}</td>#}
 {#                            <td>{{ (order.price - order.discount) * order.quantity }}</td>#}
-                            <td>{{ order.added | timesince }}</td>
-                          </tr>
-                        {% endfor %}
-                        </tbody>
-                      </table>
+{#                            <td>{{ order.added | timesince }}</td>#}
+{#                          </tr>#}
+{#                        {% endfor %}#}
+{#                        </tbody>#}
+{#                      </table>#}
                       <br>
                       <br>
                       <br>

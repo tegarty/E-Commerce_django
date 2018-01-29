@@ -10,7 +10,7 @@ from .models import Product, Category
 class AllProductsListView(ListView):
     queryset = Product.objects.all().order_by('-id')
     template_name = 'products/all_products.html'
-    paginate_by = 2
+    paginate_by = 20
 
     def get_context_data(self, **kwargs):
         context = super(AllProductsListView, self).get_context_data(**kwargs)
