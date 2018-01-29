@@ -7,7 +7,7 @@ SECRET_KEY = '+4251f+7to#f=59^wu6_n0zlf0qq%$+ba%=b-0h%$zi-)w7tj&'
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -102,6 +102,7 @@ STATICFILES_DIRS = [
 
 STATIC_ROOT = os.path.join(BASE_DIR, "static_cdn")
 MEDIA_ROOT = os.path.join(BASE_DIR, "media_cdn")
+# STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static")
 
 
 EMAIL_HOST = 'smtp.gmail.com'

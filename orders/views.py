@@ -10,6 +10,11 @@ from .forms import UpdateCheckoutForm
 from products.models import Product
 
 
+from django.shortcuts import render_to_response
+from django.template import RequestContext
+
+
+
 # class CheckoutView(DetailView):
 #     template_name = 'accounts/profile.html'
 #     success_url = reverse_lazy('orders:checkout')
@@ -120,3 +125,10 @@ class OrderDeleteView(View):
                 order = qs.first()
                 order.delete()
                 return redirect('orders:checkout')
+
+
+
+def handler404(request):
+    response = render_to_response('404.html', {}, context_instance=RequestContext(request))
+    response.status_code = 404
+    return response
