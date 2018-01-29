@@ -18,6 +18,7 @@
     <table class="table table-striped">
         <thead>
           <tr>
+            <th>Picture</th>
             <th>Product Name</th>
             <th>Status</th>
             <th>Quantity</th>
@@ -26,13 +27,15 @@
             <th>Total</th>
             <th>Order Updated</th>
             <th>Order Date</th>
+            <th>Edit</th>
             <th>Delete</th>
           </tr>
         </thead>
         <tbody>
         {% for order in orders %}
           <tr>
-            <td><a href="{% url 'orders:update' pk=order.id %}">{{ order.name }}</a></td>
+            <td><a href="{{ order.image.url }}"><img src="{{ order.image.url }}" style="max-height: 35px; max-width: 35px; border-radius: 10%;"></a></td>
+            <td><a href="{{ order.get_absolute_url }}">{{ order.name }}</a></td>
             <td>{{ order.status }}</td>
             <td>{{ order.quantity }}</td>
             <td>{{ order.price }}</td>
@@ -41,6 +44,7 @@
 {#                            <td>{{ (order.price - order.discount) * order.quantity }}</td>#}
             <td>{{ order.updated | timesince }}</td>
             <td>{{ order.added | timesince }}</td>
+            <td><a href="{% url 'orders:update' pk=order.id %}" class="btn btn-success">Edit</a></td>
             <td>
                 <a href="" data-toggle="modal" class="btn btn-danger" data-target="#delete_order{{ order.id }}">
                     Delete

@@ -50,9 +50,11 @@ class CheckoutView(View):
                 user=self.request.user,
                 product_id=id,
                 name=product.name,
+                slug=product.slug,
                 price=product.price,
                 quantity=1,
                 discount=product.discount,
+                image=product.image,
             )
             messages.success(request, 'Successfully Added!')
             return redirect('orders:checkout')

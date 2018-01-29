@@ -12,6 +12,7 @@ class Checkout(models.Model):
     status = models.CharField(max_length=255, default='pending')
     product_id = models.PositiveIntegerField()
     name = models.CharField(max_length=255)
+    slug = models.SlugField(unique=True, blank=True, null=True)
     price = models.PositiveIntegerField()
     quantity = models.PositiveIntegerField()
     discount = models.FloatField(default=0, blank=True, null=True)
@@ -21,6 +22,9 @@ class Checkout(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('products:detail', kwargs={'slug': self.slug})
 
     # def get_absolute_order_url(self):
     #     return reverse('orders:order', kwargs={'pk': self.id})
