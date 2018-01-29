@@ -5,8 +5,10 @@ from django.contrib.auth import login, logout, authenticate, get_user_model
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from django.conf import settings
+
 from .forms import RegisterForm, LoginForm, UpdateProfileForm
 from .models import Account
+from orders.models import Checkout
 
 
 User = get_user_model()
@@ -111,6 +113,7 @@ class UserProfileView(DetailView):
     def get_context_data(self, **kwargs):
         context = super(UserProfileView, self).get_context_data(**kwargs)
         context['title'] = 'Profile'
+        context['orders'] = Checkout.objects.filter(user=self.request.user)
         return context
 
 

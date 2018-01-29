@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.views.generic import ListView, DetailView, View
+from django.views.generic import ListView, DetailView
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
 
@@ -60,7 +60,7 @@ class ProductsListView(ListView):
                 Q(name__icontains=search) |
                 Q(description__icontains=search) |
                 Q(category__category__icontains=search)
-            ).distinct()
+            ).distinct().order_by('-id')
             context = {
                 'products': queryset,
                 'categories': Category.objects.all().order_by('category'),
@@ -68,7 +68,7 @@ class ProductsListView(ListView):
             }
             return render(request, 'products/categories.html', context)
         if not minimum == '' and not maximum == '':
-            queryset = Product.objects.filter(price__range=(minimum, maximum))
+            queryset = Product.objects.filter(price__range=(minimum, maximum)).order_by('-id')
             context = {
                 'products': queryset,
                 'categories': Category.objects.all().order_by('category'),
@@ -101,13 +101,6 @@ class CategoryListView(ListView):
         context = super(CategoryListView, self).get_context_data(**kwargs)
         context['title'] = 'Category'
         context['categories'] = Category.objects.all().order_by('category')
-        context['products'] = Product.objects.filter(category__category=self.kwargs['category'])
+        context['products'] = Product.objects.filter(category__category=self.kwargs['category']).order_by('-id')
         context['current_category'] = self.kwargs['category']
         return context
-
-
-
-# for remember
-# class List(ListView):
-#     def get_queryset(self):
-#         return Product.objects.filter(user=self.request.user)

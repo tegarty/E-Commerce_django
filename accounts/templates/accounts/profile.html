@@ -2,6 +2,8 @@
 
 {% load static %}
 
+{% load mathfilters %}
+
 {% block title %}
     {{ user }}'s {{ title }} | {{ block.super }}
 {% endblock %}
@@ -149,13 +151,14 @@
                         <tbody>
                         {% for order in orders %}
                           <tr>
-                            <td>{{ order.product_name }}</td>
+                            <td>{{ order.name }}</td>
                             <td>{{ order.status }}</td>
                             <td>{{ order.quantity }}</td>
                             <td>{{ order.price }}</td>
                             <td>{{ order.discount }}</td>
+                            <td>{{ order.price |mul:order.discount |div:100 |sub:order.price |mul:-1 |mul:order.quantity }}</td>
 {#                            <td>{{ (order.price - order.discount) * order.quantity }}</td>#}
-{#                            <td>{{ order.order_date.strftime('%a, %d %b %Y %H:%M:%S') }}</td>#}
+                            <td>{{ order.added | timesince }}</td>
                           </tr>
                         {% endfor %}
                         </tbody>

@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 
 {% load static %}
+
 {% load mathfilters %}
+
 {% block title %}
     {{ product.name }}'s Detail | {{ block.super }}
 {% endblock %}
@@ -51,12 +53,22 @@
 {#									<label>Quantity:</label>#}
 {#									<input type="text" value="3" />#}
                                     {% if product.quantity == 1 or product.quantity > 1  %}
-									<a href="#" class="btn btn-fefault cart" style="margin-top: 4px;">
-										<i class="fa fa-shopping-cart"></i>
-										Add to cart
-									</a>
+{#									<a href="#" class="btn btn-fefault cart" style="margin-top: 4px;">#}
+{#										<i class="fa fa-shopping-cart"></i>#}
+{#										Add to cart#}
+{#									</a>#}
+                                        {% if request.user.is_authenticated %}
+                                            <form action="{% url 'orders:order' id=product.id %}" method="POST">
+                                                {% csrf_token %}
+                                                <input type="hidden" value="{{ product.id }}" name="id">
+                                                <button class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
+{#										    <a href="{% url 'orders:order' id=product.id %}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>#}
+                                            </form>
+                                        {% else %}
+                                            <a href="{% url 'accounts:login' %}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Log In to buy</a>
+                                        {% endif %}
                                     {% elif product.quantity == 0 %}
-                                    <a href="" class="btn btn-danger" style="margin-top: 4px; margin-left: 25px; border-radius: 0;" disabled=""><i class="fa fa-shopping-cart" style="margin-right: 5px;"></i>Out Of Stock</a>
+                                        <a href="" class="btn btn-danger" style="margin-top: 4px; margin-left: 25px; border-radius: 0;" disabled=""><i class="fa fa-shopping-cart" style="margin-right: 5px;"></i>Out Of Stock</a>
                                     {% endif %}
 								</span>
 								<p><b>Discount Price:</b>
