@@ -84,6 +84,9 @@ class ProductDetailView(DetailView):
 
     def get_object(self):
         slug = self.kwargs['slug']
+        product = Product.objects.filter(slug=slug).first()
+        product.number_of_views += 1
+        product.save()
         return get_object_or_404(Product, slug=slug, publish=True)
 
     def get_context_data(self, **kwargs):
