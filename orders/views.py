@@ -184,6 +184,10 @@ class BuyOrdersView(View):
                 for order in qs:
                     order.status = 'pending'
                     order.save()
+                    product = Product.objects.filter(id=order.product_id).first()
+                    product.quantity -= order.quantity
+                    product.number_of_sales += 1
+                    product.save()
                 return redirect('orders:pending')
 
 
