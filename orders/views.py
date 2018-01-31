@@ -46,7 +46,7 @@ class CheckoutView(View):
 
     def post(self, request, id):
         id = self.kwargs['id']
-        qs = Checkout.objects.filter(product_id=id)
+        qs = Checkout.objects.filter(product_id=id, status='waiting')
         if qs.exists():
             messages.success(request, 'You can not add this product because its already added before!')
             return redirect('orders:checkout')

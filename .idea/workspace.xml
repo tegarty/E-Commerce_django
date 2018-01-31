@@ -17,8 +17,8 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/reviews/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="660">
-              <caret line="30" column="28" lean-forward="false" selection-start-line="30" selection-start-column="28" selection-end-line="30" selection-end-column="28" />
+            <state relative-caret-position="-93">
+              <caret line="16" column="16" lean-forward="true" selection-start-line="16" selection-start-column="16" selection-end-line="16" selection-end-column="16" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
               </folding>
@@ -29,8 +29,8 @@
       <file leaf-file-name="product_detail.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/products/templates/products/product_detail.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="29">
-              <caret line="147" column="56" lean-forward="false" selection-start-line="147" selection-start-column="56" selection-end-line="147" selection-end-column="56" />
+            <state relative-caret-position="-59">
+              <caret line="143" column="45" lean-forward="false" selection-start-line="143" selection-start-column="45" selection-end-line="143" selection-end-column="45" />
               <folding>
                 <element signature="e#5972#5995#0#HTML" expanded="true" />
                 <element signature="e#6000#6006#1#HTML" expanded="true" />
@@ -39,8 +39,9 @@
                 <element signature="e#6110#6116#0#HTML" expanded="true" />
                 <element signature="e#6156#6162#0#HTML" expanded="true" />
                 <element signature="e#6550#6573#0#HTML" expanded="true" />
-                <element signature="e#7423#7443#0#HTML" expanded="true" />
-                <marker date="1517424069925" expanded="false" signature="1892:1908" ph="..." />
+                <element signature="e#7444#7450#0#HTML" expanded="true" />
+                <element signature="e#7511#7531#0#HTML" expanded="true" />
+                <marker date="1517425735600" expanded="false" signature="1892:1908" ph="..." />
               </folding>
             </state>
           </provider>
@@ -98,20 +99,20 @@
         <option value="$PROJECT_DIR$/orders/templates/orders/orders.html" />
         <option value="$PROJECT_DIR$/templates/includes/nav_bar.html" />
         <option value="$PROJECT_DIR$/orders/urls.py" />
-        <option value="$PROJECT_DIR$/orders/models.py" />
         <option value="$PROJECT_DIR$/accounts/forms.py" />
         <option value="$PROJECT_DIR$/orders/templates/orders/cofirm_buy_modal.html" />
         <option value="$PROJECT_DIR$/orders/templates/orders/checkout.html" />
-        <option value="$PROJECT_DIR$/orders/views.py" />
         <option value="$PROJECT_DIR$/e_commerce/settings.py" />
         <option value="$PROJECT_DIR$/reviews/admin.py" />
         <option value="$PROJECT_DIR$/e_commerce/urls.py" />
         <option value="$PROJECT_DIR$/reviews/urls.py" />
         <option value="$PROJECT_DIR$/reviews/forms.py" />
-        <option value="$PROJECT_DIR$/products/templates/products/product_detail.html" />
         <option value="$PROJECT_DIR$/reviews/views.py" />
         <option value="$PROJECT_DIR$/reviews/models.py" />
         <option value="$PROJECT_DIR$/products/views.py" />
+        <option value="$PROJECT_DIR$/products/templates/products/product_detail.html" />
+        <option value="$PROJECT_DIR$/orders/views.py" />
+        <option value="$PROJECT_DIR$/orders/models.py" />
       </list>
     </option>
   </component>
@@ -641,46 +642,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/orders/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2332">
-          <caret line="65" column="22" lean-forward="true" selection-start-line="65" selection-start-column="22" selection-end-line="65" selection-end-column="22" />
-          <folding>
-            <element signature="e#0#64#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/products/templates/products/product_detail.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="29">
-          <caret line="147" column="56" lean-forward="false" selection-start-line="147" selection-start-column="56" selection-end-line="147" selection-end-column="56" />
-          <folding>
-            <element signature="e#5972#5995#0#HTML" expanded="true" />
-            <element signature="e#6000#6006#1#HTML" expanded="true" />
-            <element signature="e#6038#6044#0#HTML" expanded="true" />
-            <element signature="e#6082#6105#0#HTML" expanded="true" />
-            <element signature="e#6110#6116#0#HTML" expanded="true" />
-            <element signature="e#6156#6162#0#HTML" expanded="true" />
-            <element signature="e#6550#6573#0#HTML" expanded="true" />
-            <element signature="e#7423#7443#0#HTML" expanded="true" />
-            <marker date="1517424069925" expanded="false" signature="1892:1908" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/products/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="44">
           <caret line="2" column="46" lean-forward="true" selection-start-line="2" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/orders/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="12" column="20" lean-forward="true" selection-start-line="12" selection-start-column="20" selection-end-line="12" selection-end-column="20" />
           <folding />
         </state>
       </provider>
@@ -696,17 +661,52 @@
     <entry file="file://$PROJECT_DIR$/products/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
-          <caret line="98" column="0" lean-forward="false" selection-start-line="98" selection-start-column="0" selection-end-line="98" selection-end-column="0" />
+          <caret line="98" column="92" lean-forward="true" selection-start-line="98" selection-start-column="92" selection-end-line="98" selection-end-column="92" />
           <folding>
             <element signature="e#0#64#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/products/templates/products/product_detail.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-59">
+          <caret line="143" column="45" lean-forward="false" selection-start-line="143" selection-start-column="45" selection-end-line="143" selection-end-column="45" />
+          <folding>
+            <element signature="e#5972#5995#0#HTML" expanded="true" />
+            <element signature="e#6000#6006#1#HTML" expanded="true" />
+            <element signature="e#6038#6044#0#HTML" expanded="true" />
+            <element signature="e#6082#6105#0#HTML" expanded="true" />
+            <element signature="e#6110#6116#0#HTML" expanded="true" />
+            <element signature="e#6156#6162#0#HTML" expanded="true" />
+            <element signature="e#6550#6573#0#HTML" expanded="true" />
+            <element signature="e#7444#7450#0#HTML" expanded="true" />
+            <element signature="e#7511#7531#0#HTML" expanded="true" />
+            <marker date="1517425735600" expanded="false" signature="1892:1908" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/orders/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="20" column="28" lean-forward="false" selection-start-line="20" selection-start-column="28" selection-end-line="20" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/orders/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1408">
+          <caret line="52" column="13" lean-forward="true" selection-start-line="52" selection-start-column="13" selection-end-line="52" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/reviews/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="660">
-          <caret line="30" column="28" lean-forward="false" selection-start-line="30" selection-start-column="28" selection-end-line="30" selection-end-column="28" />
+        <state relative-caret-position="-93">
+          <caret line="16" column="16" lean-forward="true" selection-start-line="16" selection-start-column="16" selection-end-line="16" selection-end-column="16" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />
           </folding>

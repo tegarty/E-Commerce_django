@@ -96,6 +96,7 @@ class ProductDetailView(DetailView):
         context['categories'] = Category.objects.all().order_by('category')
         context['reviews'] = Review.objects.filter(product__slug=self.kwargs['slug']).order_by('-id')
         context['review'] = Review.objects.filter(product__slug=self.kwargs['slug']).order_by('-id')[:1].first()
+        context['review_form'] = Review.objects.filter(product__slug=self.kwargs['slug'], user=self.request.user).order_by('-id')[:1].first()
         return context
 
 

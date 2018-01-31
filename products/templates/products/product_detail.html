@@ -141,7 +141,8 @@
                                     <br>
                                     <br>
                                     <br>
-									<p><b>Write Your Review</b></p>
+                                    {% if not review_form %}
+                                    <p><b>Write Your Review</b></p>
 									<form action="{% url 'reviews:add' id=product.id %}" method="POST">
                                         {% csrf_token %}
 										<textarea name="review"></textarea>
@@ -159,6 +160,7 @@
 											Add Review
 										</button>
 									</form>
+                                    {% endif %}
 								</div>
 							</div>
 

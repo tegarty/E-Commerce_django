@@ -18,7 +18,7 @@ class Checkout(models.Model):
     status = models.CharField(max_length=255, choices=STATUS_CHOICES, default='waiting')
     product_id = models.PositiveIntegerField()
     name = models.CharField(max_length=255)
-    slug = models.SlugField(unique=True, blank=True, null=True)
+    slug = models.SlugField(blank=True, null=True)
     price = models.PositiveIntegerField()
     quantity = models.PositiveIntegerField()
     discount = models.FloatField(default=0, blank=True, null=True)
