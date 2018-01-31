@@ -8,6 +8,7 @@ from django.http import Http404
 from .models import Checkout
 from .forms import UpdateCheckoutForm
 from products.models import Product
+from accounts.models import Account
 
 
 from django.shortcuts import render_to_response
@@ -157,37 +158,34 @@ class OrderDeleteView(View):
                 return redirect('orders:checkout')
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # Buy orders
 class BuyOrdersView(View):
     template_name = 'orders/orders.html'
 
-    def post(self, request, id):
+    def post(self, request):
         username = self.request.user
         if username is None:
             raise Http404
         else:
-            qs = Checkout.objects.filter(id=id)
-            if qs.exists() and qs.count() == 1:
-                order = qs.first()
+            user_id = Account.objects.filter(user=username).first()
+            account = Account.objects.filter(user=username)
+            qs = Checkout.objects.filter(user=username, status='waiting')
+            if account.exists():
+                user = account.first()
+                if user.gender is None \
+                or user.country is None \
+                or user.region is None \
+                or user.address1 is None \
+                or user.phone_number1 is None \
+                or user.phone_number2 is None:
+                    messages.success(request, 'add your information first to complete buy orders!')
+                    return redirect('accounts:update', pk=user_id.id)
+            if qs.exists():
+                for order in qs:
+                    order.status = 'pending'
+                    order.save()
                 return redirect('orders:pending')
+
 
 
 

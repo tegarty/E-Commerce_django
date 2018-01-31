@@ -116,7 +116,7 @@ class LoginForm(forms.Form):
 
 
 class UpdateProfileForm(forms.ModelForm):
-    gender = forms.SelectMultiple
+    gender = forms.SelectMultiple()
     country = forms.CharField(label='Country', widget=forms.TextInput(
         attrs={
             'placeholder': 'Country',
@@ -166,3 +166,24 @@ class UpdateProfileForm(forms.ModelForm):
             'phone_number2',
             'comments',
         ]
+
+    def clean(self, *args, **kwargs):
+        gender = self.cleaned_data.get('gender')
+        country = self.cleaned_data.get('country')
+        region = self.cleaned_data.get('region')
+        address1 = self.cleaned_data.get('address1')
+        phone_number1 = self.cleaned_data.get('phone_number1')
+        phone_number2 = self.cleaned_data.get('phone_number2')
+        if not gender:
+            raise forms.ValidationError('Please select your gender!')
+        if not country:
+            raise forms.ValidationError('Please enter your country!')
+        if not region:
+            raise forms.ValidationError('Please enter your region!')
+        if not address1:
+            raise forms.ValidationError('Please enter your address1!')
+        if not phone_number1:
+            raise forms.ValidationError('Please enter your phone number1!')
+        if not phone_number2:
+            raise forms.ValidationError('Please enter your phone number2!')
+        return super(UpdateProfileForm, self).clean(*args, **kwargs)

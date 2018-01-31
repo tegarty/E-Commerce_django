@@ -58,9 +58,11 @@
       <br>
       <br>
       {% if request.user.is_authenticated %}
-        <a href="" data-toggle="modal" class="btn btn-success" data-target="#confirm_buy" style="display: table; margin: 0 auto;">
-            <i class="fa fa-shopping-cart"></i>&emsp;Buy
-        </a>
+          {% if orders %}
+            <a href="" data-toggle="modal" class="btn btn-success" data-target="#confirm_buy" style="display: table; margin: 0 auto;">
+                <i class="fa fa-shopping-cart"></i>&emsp;Buy
+            </a>
+          {% endif %}
         {% include 'orders/cofirm_buy_modal.html' %}
       {% endif %}
       <br>
