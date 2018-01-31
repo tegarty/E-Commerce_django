@@ -5,6 +5,7 @@ from django.db.models import Q
 
 
 from .models import Product, Category
+from reviews.models import Review
 
 
 class AllProductsListView(ListView):
@@ -93,6 +94,8 @@ class ProductDetailView(DetailView):
         context = super(ProductDetailView, self).get_context_data(**kwargs)
         context['recommended'] = Product.objects.all().order_by('number_of_sales')[:3]
         context['categories'] = Category.objects.all().order_by('category')
+        context['reviews'] = Review.objects.filter(product__slug=self.kwargs['slug']).order_by('-id')
+        context['review'] = Review.objects.filter(product__slug=self.kwargs['slug']).order_by('-id')[:1].first()
         return context
 
 

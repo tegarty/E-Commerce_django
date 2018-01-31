@@ -10,6 +10,7 @@ urlpatterns = [
     url(r'^accounts/', include('accounts.urls', namespace='accounts')),
     url(r'^products/', include('products.urls', namespace='products')),
     url(r'^orders/', include('orders.urls', namespace='orders')),
+    url(r'^reviews/', include('reviews.urls', namespace='reviews')),
     # url(r'^$', include('products.urls')),
 ]# + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

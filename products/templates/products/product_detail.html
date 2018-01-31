@@ -105,7 +105,7 @@
 						<div class="col-sm-12">
 							<ul class="nav nav-tabs">
 								<li class="active"><a href="#details" data-toggle="tab">Product Details</a></li>
-{#								<li><a href="#reviews" data-toggle="tab">Reviews ({{ count_reviews }})</a></li>#}
+								<li><a href="#reviews" data-toggle="tab">Reviews ({{ reviews | length }})</a></li>
 							</ul>
 						</div>
 						<div class="tab-content">
@@ -120,47 +120,45 @@
 							<div class="tab-pane fade " id="reviews" >
 								<div class="col-sm-12">
 									<ul>
-{#										<li><i class="fa fa-user" style="color: #FE980F;"></i>&ensp;{{ review.user_name }}</li> &emsp;#}
-{#                                        {% if reviewresult == 1 %}#}
-{#										<li><i class="fa fa-clock-o" style="color: #FE980F;"></i>&ensp;{{ review.review_date.strftime('%H:%M:%S') }}</li> &emsp;#}
-{#										<li><i class="fa fa-calendar-o" style="color: #FE980F;"></i> &ensp;{{ review.review_date.strftime('%A, %d %B %Y') }}</li>#}
-{#                                        {% endif %}#}
+										{% if review %}
+                                        <li><i class="fa fa-user" style="color: #FE980F;"></i>&ensp;{{ review.user.username }}</li> &emsp;
+										<li><i class="fa fa-clock" style="color: #FE980F;"></i>&ensp;{{ review.added | timesince }} ago</li> &emsp;
+                                        {% endif %}
 									</ul>
-{#                                    <p>#}
-{#                                        {% if review.rate != int %}#}
-{#                                            {% for star in range(review.rate) %}#}
-{#                                            <i class="fa fa-star" style="color: #FE980F;"></i>#}
-{#                                            {% endfor %}#}
-{#                                            &#47; 5#}
-    {#                                        {% for star in range(5) %}#}
-    {#                                        <i class="fa fa-star" style="color: #FE980F;"></i>#}
-    {#                                        {% endfor %}#}
-{#                                        {% else %}#}
-{#                                        {{ 'Not Rated Yet' }}#}
-{#                                        {% endif %}#}
-{#                                    </p>#}
-{#									<p>{{ review.review }}</p>#}
+                                    <p>
+                                        {% if review.rate %}
+                                            {% with ''|center:review.rate as range %}
+                                            {% for star in range%}
+                                            <i class="fa fa-star" style="color: #FE980F;"></i>
+                                            {% endfor %}
+                                            {% endwith %}
+                                            &#47; 5
+                                        {% else %}
+                                        {{ 'Not Rated Yet' }}
+                                        {% endif %}
+                                    </p>
+									<p>{{ review.review }}</p>
                                     <br>
                                     <br>
                                     <br>
 									<p><b>Write Your Review</b></p>
-
-{#									<form action="{{ url_for('product_review', id=product.id) }}" method="post">#}
-{#										<textarea name="product_review_area"></textarea>#}
-{#										<b>Rate: </b> &emsp;#}
-{#                                        <select name="rate" style="width: 80px;" class="btn btn-default dropdown-toggle">#}
-{#                                            <option value="1">1</option>#}
-{#                                            <option value="2">2</option>#}
-{#                                            <option value="3">3</option>#}
-{#                                            <option value="4">4</option>#}
-{#                                            <option value="5">5</option>#}
-{#                                        </select>#}
-{#                                        <br>#}
-{#                                        <br>#}
-{#										<button type="submit" class="btn btn-default pull-left">#}
-{#											Add Review#}
-{#										</button>#}
-{#									</form>#}
+									<form action="{% url 'reviews:add' id=product.id %}" method="POST">
+                                        {% csrf_token %}
+										<textarea name="review"></textarea>
+										<b>Rate: </b> &emsp;
+                                        <select name="rate" style="width: 80px;" class="btn btn-default dropdown-toggle">
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                        </select>
+                                        <br>
+                                        <br>
+										<button type="submit" class="btn btn-default pull-left">
+											Add Review
+										</button>
+									</form>
 								</div>
 							</div>
 
