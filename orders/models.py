@@ -32,5 +32,8 @@ class Checkout(models.Model):
     def get_absolute_url(self):
         return reverse('products:detail', kwargs={'slug': self.slug})
 
+    class Meta:
+        verbose_name_plural = 'Orders'
+
     # def get_absolute_order_url(self):
     #     return reverse('orders:order', kwargs={'pk': self.id})

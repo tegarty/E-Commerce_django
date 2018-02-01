@@ -22,6 +22,9 @@ class Category(models.Model):
     def get_absolute_categories_url(self):
         return reverse('products:category', kwargs={'category': self.category})
 
+    class Meta:
+        verbose_name_plural = 'Categories'
+
 
 class Product(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
