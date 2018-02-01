@@ -127,23 +127,7 @@
 
                                                 | <a href="" class="update_review_button">Update</a>
                                                 <div class="update_review_form" style="display: none;">
-                                                    <form action="{% url 'reviews:update' id=product.id %}" method="POST">
-                                                        {% csrf_token %}
-                                                        <textarea name="review"></textarea>
-                                                        <b>Rate: </b> &emsp;
-                                                        <select name="rate" style="width: 80px;" class="btn btn-default dropdown-toggle">
-                                                            <option value="1">1</option>
-                                                            <option value="2">2</option>
-                                                            <option value="3">3</option>
-                                                            <option value="4">4</option>
-                                                            <option value="5">5</option>
-                                                        </select>
-                                                        <br>
-                                                        <br>
-                                                        <button type="submit" class="btn btn-default pull-left">
-                                                            Update Review
-                                                        </button>
-                                                    </form>
+                                                    {% include 'products/review_update_form.html' %}
                                                 </div>
                                             {% endif %}
                                         {% include 'reviews/delete_review_modal.html' %}
@@ -167,24 +151,7 @@
                                     <br>
                                     <br>
                                     {% if not review_form %}
-                                    <p><b>Write Your Review</b></p>
-									<form action="{% url 'reviews:add' id=product.id %}" method="POST">
-                                        {% csrf_token %}
-										<textarea name="review"></textarea>
-										<b>Rate: </b> &emsp;
-                                        <select name="rate" style="width: 80px;" class="btn btn-default dropdown-toggle">
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                            <option value="4">4</option>
-                                            <option value="5">5</option>
-                                        </select>
-                                        <br>
-                                        <br>
-										<button type="submit" class="btn btn-default pull-left">
-											Add Review
-										</button>
-									</form>
+                                        {% include 'products/add_review_form.html' %}
                                     {% endif %}
 								</div>
 							</div>
