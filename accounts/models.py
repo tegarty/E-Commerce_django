@@ -30,6 +30,7 @@ class Account(models.Model):
     comments = models.TextField(blank=True, null=True)
     activation_key = models.CharField(max_length=120, blank=True, null=True)
     activated = models.BooleanField(default=False)
+    block_review = models.BooleanField(default=False)
     added = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 

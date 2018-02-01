@@ -9,6 +9,7 @@ from django.http import Http404, HttpResponseRedirect
 from .models import Review
 # from .forms import UpdateReviewForm
 from products.models import Product
+from accounts.models import Account
 
 
 class AddReviewView(View):
@@ -18,6 +19,10 @@ class AddReviewView(View):
         review = request.POST.get('review')
         rate = request.POST.get('rate')
         product = get_object_or_404(Product, id=id, publish=True)
+        user = Account.objects.filter(user=self.request.user).first()
+        if user.block_review is True:
+            messages.success(request, 'You blocked from adding review products!')
+            return redirect('products:detail', slug=product.slug)
         if review == '' or rate is None:
             messages.success(request, 'You must write a valid product review!')
             return redirect('products:detail', slug=product.slug)
@@ -43,6 +48,10 @@ class UpdateReviewView(View):
         review = request.POST.get('review')
         rate = request.POST.get('rate')
         product = get_object_or_404(Product, id=id, publish=True)
+        user = Account.objects.filter(user=self.request.user).first()
+        if user.block_review is True:
+            messages.success(request, 'You blocked from editing review products!')
+            return redirect('products:detail', slug=product.slug)
         if review == '' or rate is None:
             messages.success(request, 'You must write a valid product review!')
             return redirect('products:detail', slug=product.slug)
@@ -61,6 +70,10 @@ class DeleteReviewView(View):
         qs = Review.objects.filter(id=id)
         if qs.exists() and qs.count() == 1:
             review = qs.first()
+            user = Account.objects.filter(user=self.request.user).first()
+            if user.block_review is True:
+                messages.success(request, 'You blocked from deleting review products!')
+                return redirect('products:detail', slug=review.product.slug)
             current_user = self.request.user
             username = review.user
             if current_user == username:
