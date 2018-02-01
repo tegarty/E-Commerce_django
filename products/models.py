@@ -38,6 +38,7 @@ class Product(models.Model):
     image = models.ImageField()
     slider = models.BooleanField(default=False)
     publish = models.BooleanField(default=True)
+    block_review = models.BooleanField(default=False)
     added = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 

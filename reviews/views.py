@@ -19,6 +19,9 @@ class AddReviewView(View):
         review = request.POST.get('review')
         rate = request.POST.get('rate')
         product = get_object_or_404(Product, id=id, publish=True)
+        if product.block_review is True:
+            messages.success(request, 'This product is blocked for adding review products!')
+            return redirect('products:detail', slug=product.slug)
         user = Account.objects.filter(user=self.request.user).first()
         if user.block_review is True:
             messages.success(request, 'You blocked from adding review products!')
@@ -48,6 +51,9 @@ class UpdateReviewView(View):
         review = request.POST.get('review')
         rate = request.POST.get('rate')
         product = get_object_or_404(Product, id=id, publish=True)
+        if product.block_review is True:
+            messages.success(request, 'This product is blocked for editing review products!')
+            return redirect('products:detail', slug=product.slug)
         user = Account.objects.filter(user=self.request.user).first()
         if user.block_review is True:
             messages.success(request, 'You blocked from editing review products!')
@@ -68,6 +74,11 @@ class DeleteReviewView(View):
 
     def post(self, request, id):
         qs = Review.objects.filter(id=id)
+        product_id = qs.first().product.id
+        product = get_object_or_404(Product, id=product_id, publish=True)
+        if product.block_review is True:
+            messages.success(request, 'This product is blocked for deleting review products!')
+            return redirect('products:detail', slug=product.slug)
         if qs.exists() and qs.count() == 1:
             review = qs.first()
             user = Account.objects.filter(user=self.request.user).first()
