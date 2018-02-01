@@ -7,6 +7,7 @@ from django.contrib import messages
 from django.http import Http404, HttpResponseRedirect
 
 from .models import Review
+# from .forms import
 from products.models import Product
 
 
@@ -33,6 +34,24 @@ class AddReviewView(View):
             )
             messages.success(request, 'Successfully added your product review!')
             return redirect('products:detail', slug=product.slug)
+
+
+class UpdateReviewView(View):
+    template_name = 'products/product_detail.html'
+
+    def post(self, request, id):
+        review = request.POST.get('review')
+        rate = request.POST.get('rate')
+        product = get_object_or_404(Product, id=id, publish=True)
+        if review == '' or rate is None:
+            messages.success(request, 'You must write a valid product review!')
+            return redirect('products:detail', slug=product.slug)
+        qs = Review.objects.filter(user=self.request.user, product=product).first()
+        qs.review = review
+        qs.rate = rate
+        qs.save()
+        messages.success(request, 'Edited successfully!')
+        return redirect('products:detail', slug=product.slug)
 
 
 class DeleteReviewView(View):

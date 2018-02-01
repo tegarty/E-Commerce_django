@@ -38,7 +38,7 @@
 						<div class="col-sm-12" style="margin-bottom: 50px;">
 							<div class="view-product">
 								<img src="{{ product.image.url }}" />
-								<h3>ZOOM</h3>
+                                <a href="{{ product.image.url }}"><h3>ZOOM</h3></a>
 							</div>
 						</div>
 
@@ -121,14 +121,35 @@
 										<li><i class="fa fa-clock" style="color: #FE980F;"></i>&ensp;{{ review.added | timesince }} ago</li> &emsp;
                                             {% if request.user.username == review.user.username %}
                                                 <a href="" data-toggle="modal" data-target="#delete_review{{ review.id }}">
-                                                <span aria-hidden="true">&times;</span>
-        {#                                            Delete#}
+{#                                                <span aria-hidden="true">&times;</span>#}
+                                                    Delete
                                                 </a>
+
+                                                | <a href="" class="update_review_button">Update</a>
+                                                <div class="update_review_form" style="display: none;">
+                                                    <form action="{% url 'reviews:update' id=product.id %}" method="POST">
+                                                        {% csrf_token %}
+                                                        <textarea name="review"></textarea>
+                                                        <b>Rate: </b> &emsp;
+                                                        <select name="rate" style="width: 80px;" class="btn btn-default dropdown-toggle">
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="5">5</option>
+                                                        </select>
+                                                        <br>
+                                                        <br>
+                                                        <button type="submit" class="btn btn-default pull-left">
+                                                            Update Review
+                                                        </button>
+                                                    </form>
+                                                </div>
                                             {% endif %}
                                         {% include 'reviews/delete_review_modal.html' %}
                                         {% endif %}
 									</ul>
-                                    <p>
+                                    <div class="current_review" style="display: block;">
                                         {% if review.rate %}
                                             {% with ''|center:review.rate as range %}
                                             {% for star in range%}
@@ -139,8 +160,9 @@
                                         {% else %}
                                         {{ 'Not Rated Yet' }}
                                         {% endif %}
-                                    </p>
-									<p>{{ review.review }}</p>
+                                        <p>{{ review.review }}</p>
+                                    </div>
+
                                     <br>
                                     <br>
                                     <br>
