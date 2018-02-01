@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import DetailView, View, UpdateView, ListView, CreateView, DeleteView, FormView
 from django.core.urlresolvers import reverse
@@ -7,7 +6,6 @@ from django.contrib import messages
 from django.http import Http404, HttpResponseRedirect
 
 from .models import Review
-# from .forms import UpdateReviewForm
 from products.models import Product
 from accounts.models import Account
 

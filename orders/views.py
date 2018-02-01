@@ -120,7 +120,13 @@ class CheckoutOrderView(ListView):
         context = super(CheckoutOrderView, self).get_context_data(**kwargs)
         context['title'] = 'Cart'
         if self.request.user.is_authenticated:
-            context['orders'] = Checkout.objects.filter(user=self.request.user, status='waiting')
+            qs = Checkout.objects.filter(user=self.request.user, status='waiting')
+            context['orders'] = qs
+            orders = qs
+            total = 0
+            for order in orders:
+                total += order.price * order.quantity
+            context['total'] = total
         else:
             raise Http404
         return context

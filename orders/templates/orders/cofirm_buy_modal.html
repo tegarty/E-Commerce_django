@@ -9,7 +9,9 @@
         </button>
       </div>
       <div class="modal-body">
-        Are you sure you want to confirm buy {{ orders | length }} orders ?
+        Are you sure you want to confirm buy {{ orders | length }} orders
+        <br>
+        With total price = {{ total }} &#036; ?
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
