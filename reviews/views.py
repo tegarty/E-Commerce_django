@@ -40,6 +40,16 @@ class AddReviewView(View):
                 review=review,
                 rate=rate,
             )
+            products = Review.objects.filter(product_id=id)
+            summition_rate = 0
+            products_length = 0
+            for pro in products:
+                summition_rate += pro.rate
+                products_length += 1
+            avg = summition_rate / products_length
+            avg_rate = Product.objects.get(id=id)
+            avg_rate.avg_rate = avg
+            avg_rate.save()
             messages.success(request, 'Successfully added your product review!')
             return redirect('products:detail', slug=product.slug)
 
@@ -65,6 +75,16 @@ class UpdateReviewView(View):
         qs.review = review
         qs.rate = rate
         qs.save()
+        products = Review.objects.filter(product_id=id)
+        summition_rate = 0
+        products_length = 0
+        for pro in products:
+            summition_rate += pro.rate
+            products_length += 1
+        avg = summition_rate / products_length
+        avg_rate = Product.objects.get(id=id)
+        avg_rate.avg_rate = avg
+        avg_rate.save()
         messages.success(request, 'Edited successfully!')
         return redirect('products:detail', slug=product.slug)
 
@@ -89,6 +109,16 @@ class DeleteReviewView(View):
             username = review.user
             if current_user == username:
                 review.delete()
+                products = Review.objects.filter(product_id=product_id)
+                summition_rate = 0
+                products_length = 0
+                for pro in products:
+                    summition_rate += pro.rate
+                    products_length += 1
+                avg = summition_rate / products_length
+                avg_rate = Product.objects.get(id=product_id)
+                avg_rate.avg_rate = avg
+                avg_rate.save()
                 messages.success(request, 'deleted successfully!')
                 return redirect('products:detail', slug=review.product.slug)
             else:
