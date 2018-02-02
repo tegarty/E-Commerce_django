@@ -1,3 +1,7 @@
+ul.messages {
+    list-style: none;
+    padding: 0;
+}
 #reviews .modal-dialog div.modal-header button.close span{
     background: #fff;
     color: #cbcbcb;

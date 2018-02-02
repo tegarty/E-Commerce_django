@@ -146,9 +146,6 @@
                                         {% endif %}
                                         <p>{{ review.review }}</p>
                                     </div>
-
-                                    <br>
-                                    <br>
                                     <br>
                                     {% if review_form is None and request.user.is_authenticated %}
                                         {% include 'products/add_review_form.html' %}

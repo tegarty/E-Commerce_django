@@ -1,6 +1,8 @@
+<br>
 <form action="{% url 'reviews:update' id=product.id %}" method="POST" class="form-group">
     {% csrf_token %}
-    <textarea name="review"></textarea>
+    <textarea name="review" cols="102" rows="6"></textarea>
+    <br>
     <b>Rate: </b> &emsp;
     <select name="rate" style="width: 80px;" class="btn btn-default dropdown-toggle">
         <option value="5">5</option>
@@ -11,7 +13,7 @@
     </select>
     <br>
     <br>
-    <button type="submit" class="btn btn-default pull-left">
+    <button type="submit" class="btn btn-primary pull-left">
         Update Review
     </button>
 </form>
