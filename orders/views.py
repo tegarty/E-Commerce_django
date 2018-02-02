@@ -132,20 +132,43 @@ class CheckoutOrderView(ListView):
         return context
 
 
+# # update order page
+# class CheckoutUpdateView(UpdateView):
+#     form_class = UpdateCheckoutForm
+#     model = Checkout
+#     template_name = 'orders/update_order.html'
+#     success_url = reverse_lazy('orders:checkout')
+#
+#     # def get_success_url(self):
+#     #     return reverse('orders:checkout')
+#
+#     def get_context_data(self, **kwargs):
+#         context = super(CheckoutUpdateView, self).get_context_data(**kwargs)
+#         context['title'] = 'Update Order {}'.format(Checkout.objects.filter(id=self.kwargs['pk']).first().name)
+#         return context
+
+
 # update order page
-class CheckoutUpdateView(UpdateView):
-    form_class = UpdateCheckoutForm
-    model = Checkout
-    template_name = 'orders/update_order.html'
-    success_url = reverse_lazy('orders:checkout')
+class CheckoutUpdateView(View):
+    template_name = 'orders/checkout.html'
 
-    # def get_success_url(self):
-    #     return reverse('orders:checkout')
-
-    def get_context_data(self, **kwargs):
-        context = super(CheckoutUpdateView, self).get_context_data(**kwargs)
-        context['title'] = 'Update Order {}'.format(Checkout.objects.filter(id=self.kwargs['pk']).first().name)
-        return context
+    def post(self, request, pk):
+        quantity = int(request.POST['quantity'])
+        product_id = request.POST['product_id']
+        available = Product.objects.filter(id=product_id).first()
+        if quantity > available.quantity:
+            messages.success(request, 'Quantity more than the available quantity : {} for product : {}'.format(available.quantity, available.name))
+            return redirect('orders:checkout')
+        if quantity == 0:
+            messages.success(request, 'Quantity can not be less than 1 for product : {}'.format(available.name))
+            return redirect('orders:checkout')
+        qs = Checkout.objects.filter(id=pk, status='waiting')
+        if qs.exists() and qs.count() == 1:
+            product_quantity = qs.first()
+            product_quantity.quantity = quantity
+            product_quantity.save()
+            messages.success(request, 'Successfully Added!')
+            return redirect('orders:checkout')
 
 
 # delete order

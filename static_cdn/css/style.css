@@ -27,9 +27,11 @@ ul.messages {
     border: 1px solid #ccc;
     border-radius: 4px;
 }
-form.form-group ul{
-    display: none;
+
+form.form-group ul {
+    display: block;
 }
+
 form.form-group p input{
     display: block;
     width: 100%;

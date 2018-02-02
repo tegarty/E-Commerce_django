@@ -28,7 +28,7 @@
             <th>Total</th>
             <th>Order Updated</th>
             <th>Order Date</th>
-            <th>Edit</th>
+            <th>Edit Quantity</th>
             <th>Delete</th>
           </tr>
         </thead>
@@ -45,7 +45,15 @@
 {#                            <td>{{ (order.price - order.discount) * order.quantity }}</td>#}
             <td>{{ order.updated | timesince }}</td>
             <td>{{ order.added | timesince }}</td>
-            <td><a href="{% url 'orders:update' pk=order.id %}" class="btn btn-success">Edit</a></td>
+{#            <td><a href="{% url 'orders:update' pk=order.id %}" class="btn btn-success">Edit</a></td>#}
+            <td>
+                <form method="POST" action="{% url 'orders:update' pk=order.id %}" class="form-group">
+                    {% csrf_token %}
+                    <input type="number" name="quantity" value="{{ order.quantity }}" class="form-control" style="display: inline-block; max-width: 80px; max-height: 33px;">
+                    <input type="hidden" name="product_id" value="{{ order.product_id }}">
+                    <button type="submit" class="btn btn-success">Edit</button>
+                </form>
+            </td>
             <td>
                 <a href="" data-toggle="modal" class="btn btn-danger" data-target="#delete_order{{ order.id }}">
                     Delete
