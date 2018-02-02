@@ -185,9 +185,11 @@
 							<div class="well text-center" style="padding-bottom: 0; margin-bottom: 0;">
                                 <form action="" method="post">
                                     {% csrf_token %}
-                                    <input type="number" name="minimum" minlength="1" class="form-control" placeholder="minimum price">
+                                    <label for="minimum_price">Minimum Price</label>
+                                    <input type="number" name="minimum" minlength="1" class="form-control" placeholder="minimum price" id="minimum_price">
                                     <br>
-                                    <input type="number" name="maximum" maxlength="6" class="form-control" placeholder="maximum price">
+                                    <label for="maximum_price">Maximum Price</label>
+                                    <input type="number" name="maximum" maxlength="6" class="form-control" placeholder="maximum price" id="maximum_price">
                                     <br>
                                     <input type="submit" value="Go" class="btn btn-primary">
                                 </form>

@@ -147,10 +147,11 @@ class UpdateProfileForm(forms.ModelForm):
             'placeholder': 'Phone Number 2',
             'class': 'form-control',
         }))
-    comments = forms.Textarea(attrs={
-        'placeholder': 'Comments',
-        'class': 'form-control',
-    })
+    comments = forms.CharField(label='Comments', widget=forms.Textarea(
+        attrs={
+            'placeholder': 'Comments',
+            'class': 'form-control',
+        }))
     image = forms.ImageField(label='Image')
 
     class Meta:
