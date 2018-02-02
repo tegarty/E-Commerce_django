@@ -1,4 +1,4 @@
-<form action="{% url 'reviews:update' id=product.id %}" method="POST">
+<form action="{% url 'reviews:update' id=product.id %}" method="POST" class="form-group">
     {% csrf_token %}
     <textarea name="review"></textarea>
     <b>Rate: </b> &emsp;

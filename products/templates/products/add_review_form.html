@@ -1,5 +1,5 @@
 <p><b>Write Your Review</b></p>
-<form action="{% url 'reviews:add' id=product.id %}" method="POST">
+<form action="{% url 'reviews:add' id=product.id %}" method="POST" class="form-group">
     {% csrf_token %}
     <textarea name="review"></textarea>
     <b>Rate: </b> &emsp;
