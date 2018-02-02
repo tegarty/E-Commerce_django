@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.views.generic import DetailView, View, UpdateView, ListView
+from django.views.generic import DetailView, View, UpdateView, ListView, TemplateView
 from django.core.urlresolvers import reverse
 from django.urls import reverse_lazy
 from django.contrib import messages
@@ -194,10 +194,16 @@ class BuyOrdersView(View):
                     product.quantity -= order.quantity
                     product.number_of_sales += 1
                     product.save()
-                return redirect('orders:pending')
+                return redirect('orders:thank')
 
 
+class BuyThankView(TemplateView):
+    template_name = "orders/thank.html"
 
+    def get_context_data(self, **kwargs):
+        context = super(BuyThankView, self).get_context_data(**kwargs)
+        context['title'] = 'Thank You'
+        return context
 
 
 

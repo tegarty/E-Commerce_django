@@ -113,7 +113,10 @@ class DeleteReviewView(View):
                 for pro in products:
                     summition_rate += pro.rate
                     products_length += 1
-                avg = summition_rate / products_length
+                try:
+                    avg = summition_rate / products_length
+                except ZeroDivisionError:
+                    avg = 0
                 avg_rate = Product.objects.get(id=product_id)
                 avg_rate.avg_rate = avg
                 avg_rate.save()

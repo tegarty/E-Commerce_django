@@ -150,8 +150,9 @@
                                     <br>
                                     <br>
                                     <br>
-                                    {% if not review_form %}
+                                    {% if review_form is None and request.user.is_authenticated %}
                                         {% include 'products/add_review_form.html' %}
+                                    {% else %}
                                     {% endif %}
 								</div>
 							</div>

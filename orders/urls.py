@@ -9,6 +9,7 @@ from .views import (
     AcceptedOrdersView,
     RejectedOrdersView,
     BuyOrdersView,
+    BuyThankView,
     )
 
 urlpatterns = [
@@ -19,5 +20,6 @@ urlpatterns = [
     url(r'^pending/$', OrdersView.as_view(), name='pending'),
     url(r'^rejected/$', RejectedOrdersView.as_view(), name='rejected'),
     url(r'^accepted/$', AcceptedOrdersView.as_view(), name='accepted'),
+    url(r'^thank_you/$', BuyThankView.as_view(), name='thank'),
     url(r'^buy/$', BuyOrdersView.as_view(), name='buy'),
 ]

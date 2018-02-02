@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ title }} | {{ block.super }}
+{% endblock %}
+
+{% block body %}
+    <div class="col-sm-offset-3 col-sm-6">
+        <br>
+        <h1>Thank You For Buying Orders</h1>
+        <br>
+        <a href="{% url 'accounts:profile' %}">Go To Profile</a>
+    </div>
+{% endblock %}
