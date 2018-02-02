@@ -47,12 +47,17 @@
             <td>{{ order.added | timesince }}</td>
 {#            <td><a href="{% url 'orders:update' pk=order.id %}" class="btn btn-success">Edit</a></td>#}
             <td>
+                <div class="update_quantity_button">
+                    <button type="button" class="btn btn-success">Edit</button>
+                </div>
+                <div class="update_quantity" style="display: none;">
                 <form method="POST" action="{% url 'orders:update' pk=order.id %}" class="form-group">
                     {% csrf_token %}
                     <input type="number" name="quantity" value="{{ order.quantity }}" class="form-control" style="display: inline-block; max-width: 80px; max-height: 33px;">
                     <input type="hidden" name="product_id" value="{{ order.product_id }}">
-                    <button type="submit" class="btn btn-success">Edit</button>
+                    <button type="submit" class="btn btn-success save">Save</button>
                 </form>
+                </div>
             </td>
             <td>
                 <a href="" data-toggle="modal" class="btn btn-danger" data-target="#delete_order{{ order.id }}">

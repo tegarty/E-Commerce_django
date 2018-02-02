@@ -159,7 +159,7 @@ class CheckoutUpdateView(View):
         if quantity > available.quantity:
             messages.success(request, 'Quantity more than the available quantity : {} for product : {}'.format(available.quantity, available.name))
             return redirect('orders:checkout')
-        if quantity == 0:
+        if quantity == 0 or quantity < 0:
             messages.success(request, 'Quantity can not be less than 1 for product : {}'.format(available.name))
             return redirect('orders:checkout')
         qs = Checkout.objects.filter(id=pk, status='waiting')
