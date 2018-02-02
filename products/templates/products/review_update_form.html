@@ -1,15 +1,15 @@
 <br>
 <form action="{% url 'reviews:update' id=product.id %}" method="POST" class="form-group">
     {% csrf_token %}
-    <textarea name="review" cols="102" rows="6"></textarea>
+    <textarea name="review" cols="102" rows="6">{{ review.review }}</textarea>
     <br>
     <b>Rate: </b> &emsp;
     <select name="rate" style="width: 80px;" class="btn btn-default dropdown-toggle">
-        <option value="5">5</option>
-        <option value="4">4</option>
-        <option value="3">3</option>
-        <option value="2">2</option>
-        <option value="1">1</option>
+        <option {% if review.rate == 5 %} selected {% endif %} value="5">5</option>
+        <option {% if review.rate == 4 %} selected {% endif %} value="4">4</option>
+        <option {% if review.rate == 3 %} selected {% endif %} value="3">3</option>
+        <option {% if review.rate == 2 %} selected {% endif %} value="2">2</option>
+        <option {% if review.rate == 1 %} selected {% endif %} value="1">1</option>
     </select>
     <br>
     <br>
