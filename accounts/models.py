@@ -19,6 +19,10 @@ class Gender(models.Model):
 
 class Account(models.Model):
     user = models.OneToOneField(User)
+    username = models.CharField(max_length=255)
+    first_name = models.CharField(max_length=255)
+    last_name = models.CharField(max_length=255)
+    email = models.CharField(max_length=255)
     gender = models.ForeignKey(Gender, on_delete=models.CASCADE, blank=True, null=True)
     country = models.CharField(max_length=255, blank=True, null=True)
     image = models.ImageField(default='default.png', blank=True, null=True)
@@ -63,7 +67,13 @@ class Account(models.Model):
 
 def post_save_user_receiver(sender, instance, created, *args, **kwargs):
     if created:
-        profile, is_created = Account.objects.get_or_create(user=instance)
+        profile, is_created = Account.objects.get_or_create(
+            user=instance,
+            first_name=instance.first_name,
+            last_name=instance.last_name,
+            username=instance.username,
+            email=instance.email,
+        )
 
 
 post_save.connect(post_save_user_receiver, sender=User)

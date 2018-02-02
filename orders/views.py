@@ -144,7 +144,7 @@ class CheckoutUpdateView(UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super(CheckoutUpdateView, self).get_context_data(**kwargs)
-        context['title'] = 'Update Order'
+        context['title'] = 'Update Order {}'.format(Checkout.objects.filter(id=self.kwargs['pk']).first().name)
         return context
 
 
