@@ -1,8 +1,9 @@
 from django.db import models
 from django.conf import settings
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, pre_delete
 from django.core.urlresolvers import reverse
 from django.core.mail import send_mail
+import os
 
 from .utils import code_generator
 
@@ -76,4 +77,14 @@ def post_save_user_receiver(sender, instance, created, *args, **kwargs):
         )
 
 
+def pre_delete_account_img(sender, instance, *args, **kwargs):
+    if instance.image:
+        if instance.image == 'default.png':
+            pass
+        else:
+            if os.path.isfile(instance.image.path):
+                os.remove(instance.image.path)
+
+
+pre_delete.connect(pre_delete_account_img, sender=Account)
 post_save.connect(post_save_user_receiver, sender=User)

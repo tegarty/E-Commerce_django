@@ -1,8 +1,8 @@
 from django.db import models
-from django.db.models.signals import pre_save, post_save
+from django.db.models.signals import pre_save, post_save, pre_delete
 from django.contrib.auth import get_user_model
 from django.core.urlresolvers import reverse
-
+import os
 
 from .utils import create_slug
 
@@ -67,5 +67,12 @@ def post_save_user_receiver(sender, instance, created, *args, **kwargs):
             category.save()
 
 
+def pre_delete_product_img(sender, instance, *args, **kwargs):
+    if instance.image:
+        if os.path.isfile(instance.image.path):
+            os.remove(instance.image.path)
+
+
 pre_save.connect(pre_save_post_reciver, sender=Product)
 post_save.connect(post_save_user_receiver, sender=Product)
+pre_delete.connect(pre_delete_product_img, sender=Product)
