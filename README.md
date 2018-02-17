@@ -8,7 +8,7 @@
 > [E-Commerce](https://buysell-osama-mohamed-django.herokuapp.com)
 
 
-## E-commerce website containes:
+## E-commerce website contains:
 ### 5 Apps :
     1. Accounts
     2. Products
